@@ -18,8 +18,8 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 
-title: 'Bob Gale&rsquo;s Blog'
-name: 'Bob Gale&rsquo;s Blog'
+title: "Bob Gale's Blog"
+name: "Bob Gale's Blog"
 email: bawbgale@gmail.com
 description: >-
   Seattle-based software engineer and data geek. Into agile, big data, 
