@@ -29,7 +29,7 @@ baseurl: "" # the subpath of your site, e.g. /blog
 url: https://www.bawbgale.com
 twitter_username: bawbgale
 github_username:  bawbgale
-
+show_excerpts: true
 # Build settings
 theme: minima
 plugins:
