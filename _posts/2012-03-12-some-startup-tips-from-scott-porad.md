@@ -1,7 +1,7 @@
 ---
 id: 17
 title: Some Startup Tips from Scott Porad
-date: 2012-03-12T04:10:00+00:00
+date: 2012-03-12T04:10:00-08:00
 author: Bob Gale
 layout: post
 guid: http://www.bawbgale.com/?p=17

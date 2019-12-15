@@ -1,7 +1,7 @@
 ---
 id: 8
 title: EMP Art of Video Games exhibit disappoints like a mass market tomato
-date: 2013-03-04T01:03:12+00:00
+date: 2013-03-04T01:03:12-08:00
 author: Bob Gale
 layout: post
 guid: http://www.bawbgale.com/?p=8

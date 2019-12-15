@@ -1,7 +1,7 @@
 ---
 id: 58
 title: 'Why PMs should love CI, part 3: Prioritizing the code that’s needed, not the code they know'
-date: 2015-03-19T05:45:36+00:00
+date: 2015-03-19T05:45:36-08:00
 author: Bob Gale
 layout: post
 guid: http://www.bawbgale.com/?p=58

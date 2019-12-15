@@ -1,7 +1,7 @@
 ---
 id: 9
 title: How Amazon can disrupt the smartphone AND payment businesses
-date: 2012-07-11T04:56:37+00:00
+date: 2012-07-11T04:56:37-08:00
 author: Bob Gale
 layout: post
 guid: http://www.bawbgale.com/?p=9

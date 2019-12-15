@@ -1,7 +1,7 @@
 ---
 id: 46
 title: Impact mapping example
-date: 2015-01-17T03:32:42+00:00
+date: 2015-01-17T03:32:42-08:00
 author: Bob Gale
 layout: post
 guid: http://www.bawbgale.com/?p=46

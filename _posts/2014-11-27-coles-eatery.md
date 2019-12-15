@@ -1,7 +1,7 @@
 ---
 id: 4
 title: 'Cole’s Eatery'
-date: 2014-11-27T14:54:13+00:00
+date: 2014-11-27T14:54:13-08:00
 author: Bob Gale
 layout: post
 guid: http://www.bawbgale.com/?p=4

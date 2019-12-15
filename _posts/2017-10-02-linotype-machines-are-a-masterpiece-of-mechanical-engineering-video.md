@@ -1,7 +1,7 @@
 ---
 id: 114
 title: Linotype machines are a masterpiece of mechanical engineering (video)
-date: 2017-10-02T13:39:59+00:00
+date: 2017-10-02T13:39:59-08:00
 author: Bob Gale
 layout: post
 guid: http://www.bawbgale.com/?p=114

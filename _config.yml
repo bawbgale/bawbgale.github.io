@@ -41,6 +41,9 @@ show_excerpts: true
 paginate: 5
 paginate_path: "/page/:num/"
 
+# set timezone
+timezone: America/Los_Angeles
+
 # Build settings
 theme: minima
 plugins:

@@ -1,7 +1,7 @@
 ---
 id: 274
 title: Creating a personal connection between data and user with conditional narrative in Tableau
-date: 2019-02-18T05:55:14+00:00
+date: 2019-02-18T05:55:14-08:00
 author: Bob Gale
 layout: post
 guid: https://www.bawbgale.com/?p=274

@@ -1,7 +1,7 @@
 ---
 id: 10
 title: I hope the Sinking Ship garage is never torn down
-date: 2012-07-04T20:08:09+00:00
+date: 2012-07-04T20:08:09-08:00
 author: Bob Gale
 layout: post
 guid: http://www.bawbgale.com/?p=10

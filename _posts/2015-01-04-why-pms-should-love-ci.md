@@ -1,7 +1,7 @@
 ---
 id: 41
 title: Why PMs should love CI
-date: 2015-01-04T22:00:18+00:00
+date: 2015-01-04T22:00:18-08:00
 author: Bob Gale
 layout: post
 guid: http://www.bawbgale.com/?p=41

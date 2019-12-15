@@ -1,7 +1,7 @@
 ---
 id: 115
 title: Adventures in Tableau Server device type analysis
-date: 2017-10-08T15:18:22+00:00
+date: 2017-10-08T15:18:22-08:00
 author: Bob Gale
 layout: post
 guid: http://www.bawbgale.com/?p=115

@@ -1,7 +1,7 @@
 ---
 id: 74
 title: 'Why PMs should love CI, part 4: Coding your way to clearer requirements'
-date: 2015-04-14T05:04:08+00:00
+date: 2015-04-14T05:04:08-08:00
 author: Bob Gale
 layout: post
 guid: http://www.bawbgale.com/?p=74

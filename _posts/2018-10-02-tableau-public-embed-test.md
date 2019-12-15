@@ -1,7 +1,7 @@
 ---
 id: 178
 title: Tableau Public embed test
-date: 2018-10-02T18:25:36+00:00
+date: 2018-10-02T18:25:36-08:00
 author: Bob Gale
 layout: post
 guid: http://www.bawbgale.com/?p=178

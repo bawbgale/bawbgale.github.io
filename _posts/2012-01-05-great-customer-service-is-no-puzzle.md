@@ -1,7 +1,7 @@
 ---
 id: 18
 title: Great customer service is no puzzle
-date: 2012-01-05T00:42:53+00:00
+date: 2012-01-05T00:42:53-08:00
 author: Bob Gale
 layout: post
 guid: http://www.bawbgale.com/?p=18

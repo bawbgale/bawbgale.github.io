@@ -1,7 +1,7 @@
 ---
 id: 6
 title: 'Don’t crowdfund fireworks. Crowdsource unfireworks.'
-date: 2013-04-03T17:08:00+00:00
+date: 2013-04-03T17:08:00-08:00
 author: Bob Gale
 layout: post
 guid: http://www.bawbgale.com/?p=6

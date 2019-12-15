@@ -1,7 +1,7 @@
 ---
 id: 35
 title: Virtues of starting sprints mid-week
-date: 2014-12-01T15:49:08+00:00
+date: 2014-12-01T15:49:08-08:00
 author: Bob Gale
 layout: post
 guid: http://www.bawbgale.com/?p=35

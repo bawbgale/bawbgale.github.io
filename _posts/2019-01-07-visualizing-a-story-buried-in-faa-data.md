@@ -1,7 +1,7 @@
 ---
 id: 193
 title: Visualizing a story buried in FAA data
-date: 2019-01-07T16:45:45+00:00
+date: 2019-01-07T16:45:45-08:00
 author: Bob Gale
 layout: post
 guid: https://www.bawbgale.com/?p=193

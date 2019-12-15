@@ -1,7 +1,7 @@
 ---
 id: 19
 title: Tips for Using Online Surveys at Startup Weekend
-date: 2011-11-19T07:07:09+00:00
+date: 2011-11-19T07:07:09-08:00
 author: Bob Gale
 layout: post
 guid: http://www.bawbgale.com/?p=19

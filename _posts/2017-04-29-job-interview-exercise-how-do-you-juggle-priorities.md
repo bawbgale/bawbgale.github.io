@@ -1,7 +1,7 @@
 ---
 id: 106
 title: 'Job interview exercise: How do you juggle priorities?'
-date: 2017-04-29T14:11:55+00:00
+date: 2017-04-29T14:11:55-08:00
 author: Bob Gale
 layout: post
 guid: http://www.bawbgale.com/?p=106

@@ -1,7 +1,7 @@
 ---
 id: 222
 title: Wrangling photos into Tableau (with a stopover in serverless functions)
-date: 2019-01-14T16:48:12+00:00
+date: 2019-01-14T16:48:12-08:00
 author: Bob Gale
 layout: post
 guid: https://www.bawbgale.com/?p=222

@@ -1,7 +1,7 @@
 ---
 id: 7
 title: Hacking up a standing desk
-date: 2013-03-26T13:49:00+00:00
+date: 2013-03-26T13:49:00-08:00
 author: Bob Gale
 layout: post
 guid: http://www.bawbgale.com/?p=7

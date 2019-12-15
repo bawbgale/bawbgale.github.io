@@ -1,7 +1,7 @@
 ---
 id: 5
 title: 'Mike Perham’s Board Games and Beverages party at RailsConf13'
-date: 2013-05-01T06:45:25+00:00
+date: 2013-05-01T06:45:25-08:00
 author: Bob Gale
 excerpt: Photos from this jolly event
 layout: post

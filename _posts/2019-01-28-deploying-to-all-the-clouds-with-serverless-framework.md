@@ -1,7 +1,7 @@
 ---
 id: 249
 title: Deploying to all the clouds with Serverless Framework
-date: 2019-01-28T05:49:54+00:00
+date: 2019-01-28T05:49:54-08:00
 author: Bob Gale
 layout: post
 guid: https://www.bawbgale.com/?p=249

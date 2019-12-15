@@ -1,7 +1,7 @@
 ---
 id: 15
 title: 'What’s on my iPhone, and how I wish I could lay it out'
-date: 2012-06-17T02:39:30+00:00
+date: 2012-06-17T02:39:30-08:00
 author: Bob Gale
 layout: post
 guid: http://www.bawbgale.com/?p=15

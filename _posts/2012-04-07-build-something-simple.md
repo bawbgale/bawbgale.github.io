@@ -1,7 +1,7 @@
 ---
 id: 16
 title: 'Build Something … Simple'
-date: 2012-04-07T20:29:32+00:00
+date: 2012-04-07T20:29:32-08:00
 author: Bob Gale
 layout: post
 guid: http://www.bawbgale.com/?p=16

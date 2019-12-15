@@ -1,6 +1,6 @@
 ---
 id: 11
-date: 2012-06-27T01:31:00+00:00
+date: 2012-06-27T01:31:00-08:00
 author: Bob Gale
 layout: post
 guid: http://www.bawbgale.com/?p=11

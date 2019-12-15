@@ -1,7 +1,7 @@
 ---
 id: 82
 title: 'NPR One: A mostly awesome news party for your ears'
-date: 2015-08-17T04:05:31+00:00
+date: 2015-08-17T04:05:31-08:00
 author: Bob Gale
 layout: post
 guid: http://www.bawbgale.com/?p=82

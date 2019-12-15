@@ -1,7 +1,7 @@
 ---
 id: 55
 title: 'Why PMs should love CI, part 2: Better software (duh)'
-date: 2015-02-07T21:59:52+00:00
+date: 2015-02-07T21:59:52-08:00
 author: Bob Gale
 layout: post
 guid: http://www.bawbgale.com/?p=55
