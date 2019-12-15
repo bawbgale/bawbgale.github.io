@@ -17,10 +17,10 @@ categories:
 
 What? Bob, how could you say such a thing about that ugly monstrosity? They tore down a beautiful old hotel to build it, an event that so horrified Seattle that it kicked off the preservation movement that led to the protection of Pioneer Square.
 
-Why, because it&#8217;s such an perfect symbol of that very struggle &#8212; a ship ripping through the fabric of the city, pointed right at its historical center. And not just any ship, a ship carrying cars! Brilliant.
+Why, because it’s such an perfect symbol of that very struggle — a ship ripping through the fabric of the city, pointed right at its historical center. And not just any ship, a ship carrying cars! Brilliant.
 
-I&#8217;m not saying we should never tear down old stuff to build new stuff. Just that history is important &#8212; history that you can live in and touch &#8212; and we can easily lose it in the busy business of our daily lives. The sinking ship is now part of history too.
+I’m not saying we should never tear down old stuff to build new stuff. Just that history is important — history that you can live in and touch — and we can easily lose it in the busy business of our daily lives. The sinking ship is now part of history too.
 
-Plus, now that it&#8217;s built, why waste it? That would also be short-sighted.
+Plus, now that it’s built, why waste it? That would also be short-sighted.
 
-BTW, legend has it the lot is cursed. Here&#8217;s a [Danny Westneat column about its colorful history](http://seattletimes.nwsource.com/html/dannywestneat/2011277009_danny07.html).
+BTW, legend has it the lot is cursed. Here’s a [Danny Westneat column about its colorful history](http://seattletimes.nwsource.com/html/dannywestneat/2011277009_danny07.html).

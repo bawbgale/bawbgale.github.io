@@ -25,9 +25,9 @@ For our SeaTUG session, Gina picked a fun topic from last year: a comparison of 
 
 <img src="https://www.bawbgale.com/wp-content/uploads/2019/02/01_chartoftheday_14081_the_price_of_a_party_around_the_world_n.jpg" alt="" class="wp-image-275" srcset="https://www.bawbgale.com/wp-content/uploads/2019/02/01_chartoftheday_14081_the_price_of_a_party_around_the_world_n.jpg 960w, https://www.bawbgale.com/wp-content/uploads/2019/02/01_chartoftheday_14081_the_price_of_a_party_around_the_world_n-300x214.jpg 300w, https://www.bawbgale.com/wp-content/uploads/2019/02/01_chartoftheday_14081_the_price_of_a_party_around_the_world_n-768x547.jpg 768w" sizes="(max-width: 960px) 100vw, 960px" /> </figure> 
 
-Overall, a fairly simple, attractive and understandable viz, but with plenty of room for improvement. My main criticism was that while it lets you easily compare the overall costs of each city, you can&#8217;t easily compare the costs of the individual activities, except for the &#8220;Club entry&#8221; bars aligned with the baseline. This is a common shortcoming of stacked bar charts. 
+Overall, a fairly simple, attractive and understandable viz, but with plenty of room for improvement. My main criticism was that while it lets you easily compare the overall costs of each city, you can’t easily compare the costs of the individual activities, except for the “Club entry” bars aligned with the baseline. This is a common shortcoming of stacked bar charts. 
 
-Here&#8217;s my redesign (animated to show the interactivity):<figure class="wp-block-image">
+Here’s my redesign (animated to show the interactivity):<figure class="wp-block-image">
 
 <img src="https://www.bawbgale.com/wp-content/uploads/2019/02/02_night_out.gif" alt="" class="wp-image-276" /> </figure> 
 
@@ -36,7 +36,7 @@ My main focus was increasing user engagement with the viz by personalizing it. R
 Presenting a selector and highlighting the selected city was easy, but dispensing advice with conditional narrative text was more challenging. Here’s how I did it:  
 
 
-The source data consists of a simple table of cities, activities (called &#8220;item&#8221;) and costs. The items were further categorized as &#8220;Date night&#8221; or &#8220;Party night,&#8221; though I didn&#8217;t use that in my viz.<figure class="wp-block-image">
+The source data consists of a simple table of cities, activities (called “item”) and costs. The items were further categorized as “Date night” or “Party night,” though I didn’t use that in my viz.<figure class="wp-block-image">
 
 <img src="https://www.bawbgale.com/wp-content/uploads/2019/02/03_city_data.png" alt="" class="wp-image-280" srcset="https://www.bawbgale.com/wp-content/uploads/2019/02/03_city_data.png 500w, https://www.bawbgale.com/wp-content/uploads/2019/02/03_city_data-300x153.png 300w" sizes="(max-width: 500px) 100vw, 500px" /> </figure> 
 
@@ -50,7 +50,7 @@ Then I used a simple Boolean calculation to check if each row of data pertains t
 [City] = [City Parameter]
 </pre>
 
-Then I started experimenting with charts and calculations to compare the selected city&#8217;s costs with other cities. Initially I focused on comparing each city&#8217;s ranking (both overall and per activity). Tableau makes this very easy using table calculations, but in order to use these rankings to power my conditional narrative, I needed to work with rankings outside of the visible dimensions &#8212; i.e. using LOD expressions. That’s when I realized that ranking is not well supported in Tableau outside of table calculations. So, after [upvoting this Tableau feature idea](https://community.tableau.com/ideas/4553), I switched to a different way of comparing relative prices: percent of maximum: 
+Then I started experimenting with charts and calculations to compare the selected city’s costs with other cities. Initially I focused on comparing each city’s ranking (both overall and per activity). Tableau makes this very easy using table calculations, but in order to use these rankings to power my conditional narrative, I needed to work with rankings outside of the visible dimensions — i.e. using LOD expressions. That’s when I realized that ranking is not well supported in Tableau outside of table calculations. So, after [upvoting this Tableau feature idea](https://community.tableau.com/ideas/4553), I switched to a different way of comparing relative prices: percent of maximum: 
 
 <pre class="brush: plain; title: ; wrap-lines: false; notranslate" title="">//[Selected City is Expensive?]
 SUM( IF [City is Selected?] THEN [Cost] END )
@@ -66,9 +66,9 @@ MAX( { FIXED [City] : SUM([Cost]) } )
 &lt; [Cheap Threshold]
 </pre>
 
-The numerator uses an IF THEN expression to select only the selected city&#8217;s costs before summing them. The denominator uses a FIXED LOD expression to sum the costs of each city before calculating the MAX. The resulting fractions are then compared with parameters containing the threshold that I consider &#8220;expensive&#8221; or &#8220;cheap.&#8221; Using parameters instead of hard-coding these values let me play with different thresholds and see how the viz reacted. 
+The numerator uses an IF THEN expression to select only the selected city’s costs before summing them. The denominator uses a FIXED LOD expression to sum the costs of each city before calculating the MAX. The resulting fractions are then compared with parameters containing the threshold that I consider “expensive” or “cheap.” Using parameters instead of hard-coding these values let me play with different thresholds and see how the viz reacted. 
 
-Once I had a metric that worked well with LOD calculations, I could start writing conditional expressions to display different narratives &#8212; e.g. “Congrats, Prague is one of the least expensive cities for a night out.” I split this into three separate calculations so that I could apply different text formatting to each:
+Once I had a metric that worked well with LOD calculations, I could start writing conditional expressions to display different narratives — e.g. “Congrats, Prague is one of the least expensive cities for a night out.” I split this into three separate calculations so that I could apply different text formatting to each:
 
 <pre class="brush: plain; title: ; wrap-lines: false; notranslate" title="">// [Narrative 1]
 IF [City Parameter] != '0' THEN
@@ -98,7 +98,7 @@ I displayed this narrative text above a basic bar chart that showed how the sele
 
 <img src="https://www.bawbgale.com/wp-content/uploads/2019/02/08_tooltip-1024x719.png" alt="" class="wp-image-291" srcset="https://www.bawbgale.com/wp-content/uploads/2019/02/08_tooltip-1024x719.png 1024w, https://www.bawbgale.com/wp-content/uploads/2019/02/08_tooltip-300x211.png 300w, https://www.bawbgale.com/wp-content/uploads/2019/02/08_tooltip-768x539.png 768w, https://www.bawbgale.com/wp-content/uploads/2019/02/08_tooltip.png 1142w" sizes="(max-width: 1024px) 100vw, 1024px" /> </figure> 
 
-Then I turned to creating narrative text based on individual activities. This proved to be trickier because I wanted to express nuances such as &#8220;Overall this is one of the most expensive cities, but some activities are relative bargains.&#8221; I decided to base this on categorizing each activity as relatively expensive or cheap compared with other cities, then counting them. My first attempts at this kept producing continuous measures rather than a dimension that I could list and count, until I found this knowledge base article: [Unable to Convert Measure to Dimension](https://kb.tableau.com/articles/issue/unable-to-convert-measure-to-dimension). The key was that although the calculation needs to perform an aggregation to get the MAX activity cost across cities, the end result of the calculation must not return an aggregation. So I created Boolean calculations to check if the activity&#8217;s cost is above or below the threshold for the selected city:
+Then I turned to creating narrative text based on individual activities. This proved to be trickier because I wanted to express nuances such as “Overall this is one of the most expensive cities, but some activities are relative bargains.” I decided to base this on categorizing each activity as relatively expensive or cheap compared with other cities, then counting them. My first attempts at this kept producing continuous measures rather than a dimension that I could list and count, until I found this knowledge base article: [Unable to Convert Measure to Dimension](https://kb.tableau.com/articles/issue/unable-to-convert-measure-to-dimension). The key was that although the calculation needs to perform an aggregation to get the MAX activity cost across cities, the end result of the calculation must not return an aggregation. So I created Boolean calculations to check if the activity’s cost is above or below the threshold for the selected city:
 
 <pre class="brush: plain; title: ; wrap-lines: false; notranslate" title="">// [Activity is Relatively Expensive?]
 [Cost] / {FIXED [Item] : MAX([Cost])} &gt; [Expensive Threshold]
@@ -151,14 +151,14 @@ ELSE ''
 END
 </pre>
 
-The chart&#8217;s columns are sorted by this dimension, so they rearrange themselves when the selected city is changed!<figure class="wp-block-image">
+The chart’s columns are sorted by this dimension, so they rearrange themselves when the selected city is changed!<figure class="wp-block-image">
 
 <img src="https://www.bawbgale.com/wp-content/uploads/2019/02/09_activity_chart-1024x556.png" alt="" class="wp-image-308" srcset="https://www.bawbgale.com/wp-content/uploads/2019/02/09_activity_chart-1024x556.png 1024w, https://www.bawbgale.com/wp-content/uploads/2019/02/09_activity_chart-300x163.png 300w, https://www.bawbgale.com/wp-content/uploads/2019/02/09_activity_chart-768x417.png 768w" sizes="(max-width: 1024px) 100vw, 1024px" /> </figure> 
 
 Finally, I’m a big believer in using color very intentionally. I used the practice of first designing the viz with no color at all, then adding color for emphasis. So the initial viz is entirely gray, except for the bright orange “Pick a city” prompt. Once you select a city, that color is used to highlight the data for this city throughout the viz.  
 
 
-Admittedly, with only 13 cities and 7 activities, it’s not hard to reach these same conclusions by just eyeballing the viz, without the fancy rules-based narrative. But this rules-based approach would scale up to work with a much larger dataset that you can&#8217;t easily eyeball.  
+Admittedly, with only 13 cities and 7 activities, it’s not hard to reach these same conclusions by just eyeballing the viz, without the fancy rules-based narrative. But this rules-based approach would scale up to work with a much larger dataset that you can’t easily eyeball.  
 
 
 Now that I got my feet wet with Makeover Monday, I plan to participate with new sessions more regularly. You can ﻿view and download [my final viz on Tableau Public](https://public.tableau.com/profile/bob.gale#!/vizhome/MakeoverMonday2018w48/Dashboard1).

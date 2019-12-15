@@ -12,7 +12,7 @@ tags:
   - agile development
   - program management
 ---
-I recently came up with a job interview exercise to explore how engineering team candidates approach juggling priorities. This can be especially helpful for junior candidates who don&#8217;t have as much experience to draw upon to answer a question like &#8220;Tell me about a time when your team faced multiple conflicting priorities, and how you approached deciding how to spend your time.&#8221; It&#8217;s definitely meant to be a no-right-answer Kobayashi Maru type question, so make sure to get them to elaborate on their thinking behind their choices.
+I recently came up with a job interview exercise to explore how engineering team candidates approach juggling priorities. This can be especially helpful for junior candidates who don’t have as much experience to draw upon to answer a question like “Tell me about a time when your team faced multiple conflicting priorities, and how you approached deciding how to spend your time.” It’s definitely meant to be a no-right-answer Kobayashi Maru type question, so make sure to get them to elaborate on their thinking behind their choices.
 
 * * *
 
@@ -32,9 +32,9 @@ What do you do, and why?
 
 * * *
 
-If it&#8217;s not obvious already, each choice is meant to emphasize a different set of core values:
+If it’s not obvious already, each choice is meant to emphasize a different set of core values:
 
-A: managing up, plus they can&#8217;t cop out and ask for the boss to choose  
+A: managing up, plus they can’t cop out and ask for the boss to choose  
 B: commitment, throughput, getting things done  
 C: team collaboration, shared vs. individual goals, not blocking others  
 D: reducing risk, short vs. long term planning

@@ -9,7 +9,7 @@ permalink: /tableau-public-embed-test/
 categories:
   - Uncategorized
 ---
-Below is a viz I published on Tableau Public viz and embedded in this blog post to demonstrate the ability to easily enhance web pages with interactive data visualizations. It also takes advantage of Tableau&#8217;s [Device Designer](https://www.tableau.com/about/blog/2016/6/device-designer-56018) to optimize the layout for mobile devices. View this page on a mobile phone and notice how the bars shorten appropriately and the aircraft legend at the top moves to the bottom.
+Below is a viz I published on Tableau Public viz and embedded in this blog post to demonstrate the ability to easily enhance web pages with interactive data visualizations. It also takes advantage of Tableau’s [Device Designer](https://www.tableau.com/about/blog/2016/6/device-designer-56018) to optimize the layout for mobile devices. View this page on a mobile phone and notice how the bars shorten appropriately and the aircraft legend at the top moves to the bottom.
 
 <div class='tableauPlaceholder' id='viz1538504490862' style='position: relative'>
   <noscript>

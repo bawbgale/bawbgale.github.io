@@ -46,7 +46,7 @@ At first glance, this seemed pretty straightforward. JetPhotos.com doesn’t hav
 
 However, this serves up a full web page with a multiple photos and lots of surrounding navigation, rather than a nice clean individual image. Not very pretty in a Tableau dashboard.
 
-Digging through the HTML of the JetPhotos.com pages, I was able to extract individual image URLs, but this presented another problem: Unlike page URLs, the image URLs are cryptic &#8212; i.e. not at all derivable based on tail number. <figure class="wp-block-image">
+Digging through the HTML of the JetPhotos.com pages, I was able to extract individual image URLs, but this presented another problem: Unlike page URLs, the image URLs are cryptic — i.e. not at all derivable based on tail number. <figure class="wp-block-image">
 
 <img src="https://www.bawbgale.com/wp-content/uploads/2019/01/03_jetphotos_image_url-1024x474.png" alt="" class="wp-image-227" srcset="https://www.bawbgale.com/wp-content/uploads/2019/01/03_jetphotos_image_url-1024x474.png 1024w, https://www.bawbgale.com/wp-content/uploads/2019/01/03_jetphotos_image_url-300x139.png 300w, https://www.bawbgale.com/wp-content/uploads/2019/01/03_jetphotos_image_url-768x356.png 768w, https://www.bawbgale.com/wp-content/uploads/2019/01/03_jetphotos_image_url.png 1121w" sizes="(max-width: 1024px) 100vw, 1024px" /> </figure> 
 
@@ -91,7 +91,7 @@ module.exports.getjetphoto = async (event, context, callback) =&gt; {
 
 We tested the code locally and it worked like a charm. 
 
-For hosting this code, we thought this would be a great scenario for a “serverless” function on AWS Lambda &#8212; i.e. instead hosting (and paying for) full round-the-clock web hosting, the snippet of code would run on-demand, and we would be charged per request (and only if traffic exceeds AWS&#8217;s generous free tier of one million requests per month, which was unlikely).
+For hosting this code, we thought this would be a great scenario for a “serverless” function on AWS Lambda — i.e. instead hosting (and paying for) full round-the-clock web hosting, the snippet of code would run on-demand, and we would be charged per request (and only if traffic exceeds AWS’s generous free tier of one million requests per month, which was unlikely).
 
 We also used this as an occasion to try out the [Serverless Framework](https://serverless.com), an open-source project to develop a platform-agnostic interface for all the major cloud providers. Once we set up the appropriate account credentials and permissions on AWS, the framework took care of a lot of the nuts-and-bolts of deploying both a Lambda function and an API Gateway endpoint. 
 
@@ -235,7 +235,7 @@ So with the batch mode working, I was able to collect almost 400 photo URLs for 
 
 <img src="https://www.bawbgale.com/wp-content/uploads/2019/01/12_union_csvs-1024x652.png" alt="" class="wp-image-232" srcset="https://www.bawbgale.com/wp-content/uploads/2019/01/12_union_csvs-1024x652.png 1024w, https://www.bawbgale.com/wp-content/uploads/2019/01/12_union_csvs-300x191.png 300w, https://www.bawbgale.com/wp-content/uploads/2019/01/12_union_csvs-768x489.png 768w" sizes="(max-width: 1024px) 100vw, 1024px" /> </figure> 
 
-This also gave me the option of displaying multiple photos per aircraft model &#8212; i.e. potentially every tail number of that model in the JetPhotos collection. I played with a few ideas for choosing the “best” photo of each model, but settled on a simpler scheme of choosing the newest (which conveniently was the highest ID number).
+This also gave me the option of displaying multiple photos per aircraft model — i.e. potentially every tail number of that model in the JetPhotos collection. I played with a few ideas for choosing the “best” photo of each model, but settled on a simpler scheme of choosing the newest (which conveniently was the highest ID number).
 
 As a final touch, I wanted to display not only the aircraft image, but also the tail number and photographer’s name in a caption. So I modified the web scraping code to read the photographer’s name as well as the URL, then used another dashboard action to display that as a caption below the photo.<figure class="wp-block-image">
 

@@ -1,6 +1,6 @@
 ---
 id: 4
-title: 'Cole&#8217;s Eatery'
+title: 'Cole’s Eatery'
 date: 2014-11-27T14:54:13+00:00
 author: Bob Gale
 layout: post

@@ -1,6 +1,6 @@
 ---
 id: 6
-title: 'Don&#8217;t crowdfund fireworks. Crowdsource unfireworks.'
+title: 'Don’t crowdfund fireworks. Crowdsource unfireworks.'
 date: 2013-04-03T17:08:00+00:00
 author: Bob Gale
 layout: post

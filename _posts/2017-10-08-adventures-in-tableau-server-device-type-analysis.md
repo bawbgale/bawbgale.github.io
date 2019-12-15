@@ -13,7 +13,7 @@ tags:
   - python
   - tableau
 ---
-I work on a team that builds Tableau dashboards for hundreds of users spread across the US. We&#8217;ve been looking at ways to improve our overall user experience, and have started investigating how many users are accessing our dashboards via desktop vs. mobile devices. Our goal was to make a data-driven decision about how much effort to put into using Tableau&#8217;s device-specific layout capabilities. That simple question lead to a small odyssey through the data that Tableau Server collects about itself.
+I work on a team that builds Tableau dashboards for hundreds of users spread across the US. We’ve been looking at ways to improve our overall user experience, and have started investigating how many users are accessing our dashboards via desktop vs. mobile devices. Our goal was to make a data-driven decision about how much effort to put into using Tableau’s device-specific layout capabilities. That simple question lead to a small odyssey through the data that Tableau Server collects about itself.
 
 ## Finding the right data
 
@@ -30,22 +30,22 @@ Or so we thought:
   <a href="http://www.bawbgale.com/wp-content/uploads/2017/10/tableau_views_by_device_type.png"><img class="wp-image-116 size-large" src="http://www.bawbgale.com/wp-content/uploads/2017/10/tableau_views_by_device_type-1024x584.png" alt="tableau_views_by_device_type" width="700" height="399" srcset="https://www.bawbgale.com/wp-content/uploads/2017/10/tableau_views_by_device_type-1024x584.png 1024w, https://www.bawbgale.com/wp-content/uploads/2017/10/tableau_views_by_device_type-300x171.png 300w, https://www.bawbgale.com/wp-content/uploads/2017/10/tableau_views_by_device_type.png 1130w" sizes="(max-width: 700px) 100vw, 700px" /></a>
   
   <p class="wp-caption-text">
-    There&#8217;s no way we have that many tablet users
+    There’s no way we have that many tablet users
   </p>
 </div>
 
-This data showed surprisingly high tablet usage, which did not pass a sniff test. There&#8217;s no way we have that many tablet users! I confirmed that these numbers were fishy by browsing from my Windows 10 machine, then querying this table for my `user_id`. I saw that my views were indeed getting classified as &#8220;tablet&#8221; but another colleague&#8217;s Windows 10 views were getting classified as &#8220;desktop.&#8221;
+This data showed surprisingly high tablet usage, which did not pass a sniff test. There’s no way we have that many tablet users! I confirmed that these numbers were fishy by browsing from my Windows 10 machine, then querying this table for my `user_id`. I saw that my views were indeed getting classified as “tablet” but another colleague’s Windows 10 views were getting classified as “desktop.”
 
-Doing a little more digging, I determined that this table is recording not actual device type, but Tableau Server&#8217;s guess of your device type based on screen size, as described [here](https://onlinehelp.tableau.com/current/pro/desktop/en-us/dashboards_dsd_create.html#Test_the_dashboard_):
+Doing a little more digging, I determined that this table is recording not actual device type, but Tableau Server’s guess of your device type based on screen size, as described [here](https://onlinehelp.tableau.com/current/pro/desktop/en-us/dashboards_dsd_create.html#Test_the_dashboard_):
 
 <table>
   <colgroup> <col /> <col /></colgroup> <tr>
     <th>
-      If the smallest iframe dimension is&#8230;
+      If the smallest iframe dimension is…
     </th>
     
     <th>
-      This device layout appears&#8230;
+      This device layout appears…
     </th>
   </tr>
   
@@ -80,9 +80,9 @@ Doing a little more digging, I determined that this table is recording not actua
   </tr>
 </table>
 
-Another test with my browser window maximized confirmed that this is indeed what&#8217;s going on.
+Another test with my browser window maximized confirmed that this is indeed what’s going on.
 
-Luckily, there&#8217;s another place we can look: `http_user_agent` in the `http_requests` table:
+Luckily, there’s another place we can look: `http_user_agent` in the `http_requests` table:
 
 <pre class="brush: sql; title: ; notranslate" title="">SELECT http_user_agent
 FROM http_requests
@@ -93,7 +93,7 @@ This column contains strings like this:
 
 <pre class="brush: plain; title: ; wrap-lines: false; notranslate" title="">Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.1; Trident/4.0)</pre>
 
-Anyone who&#8217;s worked with Web server logs will recognize this as the standard way each Web browser identifies not only itself (e.g. Chrome, Safari, IE) but also what platform it is running on (e.g. Windows, Mac, iOS, Android).
+Anyone who’s worked with Web server logs will recognize this as the standard way each Web browser identifies not only itself (e.g. Chrome, Safari, IE) but also what platform it is running on (e.g. Windows, Mac, iOS, Android).
 
 However, this table presents a couple of challenges: 1) `tabadmin backup` removes all but the last 7 days of data, and 2) the `http_user_agent` string needs to be parsed to extract useful classifications from it.
 
@@ -122,9 +122,9 @@ ELSE 'other'
 END
 </pre>
 
-But that&#8217;s not only ugly and barely scratches the surface of different user agents, but also would be difficult to maintain as new browser versions are released. Also, why reinvent the wheel? This parsing is already built into numerous Web analytics products like Google Analytics, Web development frameworks, and open source libraries. So I looked around for a Tableau-friendly option.
+But that’s not only ugly and barely scratches the surface of different user agents, but also would be difficult to maintain as new browser versions are released. Also, why reinvent the wheel? This parsing is already built into numerous Web analytics products like Google Analytics, Web development frameworks, and open source libraries. So I looked around for a Tableau-friendly option.
 
-What I found is an open-source library called [woothee](https://woothee.github.io/), which has implementations for many different programming languages including that favorite of data geeks, Python. Its maintainers regularly update it as new browser versions are released, and it even recognizes known search engine bots, which it labels as &#8220;crawler.&#8221;
+What I found is an open-source library called [woothee](https://woothee.github.io/), which has implementations for many different programming languages including that favorite of data geeks, Python. Its maintainers regularly update it as new browser versions are released, and it even recognizes known search engine bots, which it labels as “crawler.”
 
 Woothee accepts an HTTP user agent string as input and returns a JSON string containing several useful attributes:
 
@@ -133,7 +133,7 @@ woothee.parse("Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.1; Trident/4.0)")
 # {'name': 'Internet Explorer', 'category': 'pc', 'os': 'Windows 7', 'version': '8.0', 'vendor': 'Microsoft', 'os_version': 'NT 6.1'}
 </pre>
 
-So how can we use this in Tableau? Perhaps this is a job for [TabPy](https://github.com/tableau/TabPy), Tableau&#8217;s tool for running Python code within Tableau calculations.
+So how can we use this in Tableau? Perhaps this is a job for [TabPy](https://github.com/tableau/TabPy), Tableau’s tool for running Python code within Tableau calculations.
 
 ## Trying TabPy
 
@@ -159,12 +159,12 @@ This intermingling of Tableau and Python code can get a bit messy so I find it v
 
 Also be careful to use only single quotes in the Python code because the whole thing will be wrapped by double quotes.
 
-Once you have TabPy working, using woothee is pretty simple. Installing TabPy will create an Anaconda environment called &#8220;Tableau-Python-Server.&#8221; Activate this environment, open a terminal session, and run:
+Once you have TabPy working, using woothee is pretty simple. Installing TabPy will create an Anaconda environment called “Tableau-Python-Server.” Activate this environment, open a terminal session, and run:
 
 <pre class="brush: bash; title: ; notranslate" title="">pip install woothee
 </pre>
 
-Then in a Tableau calculated field, you can pass in your `[Http User Agent]` values and call woothee&#8217;s `parse` function. I thought it would be as simple as the following, but soon encountered a few gotchas:
+Then in a Tableau calculated field, you can pass in your `[Http User Agent]` values and call woothee’s `parse` function. I thought it would be as simple as the following, but soon encountered a few gotchas:
 
 <pre class="brush: plain; title: ; notranslate" title="">SCRIPT_STR("
 	import woothee as wt
@@ -176,7 +176,7 @@ Then in a Tableau calculated field, you can pass in your `[Http User Agent]` val
 
 ## TabPy gotchas
 
-First, I&#8217;ll mention an overall caveat about running TabPy. If you want to use it with Tableau Server, you will need to host the TabPy server somewhere that your Tableau Server can access at all times. And the TabPy team cautions that it lacks any security layer of its own so is best installed on the same box as your Tableau Server rather than a separate instance that is open to network traffic. So any Tableau Desktop users who want to author TabPy-enabled dashboards will need to install TabPy locally, rather than pointing to one central instance used by Tableau Server.
+First, I’ll mention an overall caveat about running TabPy. If you want to use it with Tableau Server, you will need to host the TabPy server somewhere that your Tableau Server can access at all times. And the TabPy team cautions that it lacks any security layer of its own so is best installed on the same box as your Tableau Server rather than a separate instance that is open to network traffic. So any Tableau Desktop users who want to author TabPy-enabled dashboards will need to install TabPy locally, rather than pointing to one central instance used by Tableau Server.
 
 But back to the code: The most important thing to understand about TabPy calcs is that they are Table Calculations, not row-level calculations. So the inputs are expected to be aggregate data, meaning we need to wrap `[Http User Agent]` with `ATTR()`. It also means that the data passed in will be affected by the dimensions and level of aggregation in your view, so we need to design the view to group by distinct `[Http User Agent]` values, or disaggregate the measures using Analysis > Aggregate Measures > Off.
 
@@ -200,7 +200,7 @@ And we should also make the code tolerant of the possibility that it will be cal
 	)
 </pre>
 
-But there&#8217;s still a problem here. Woothee returns JSON, for which Tableau does not have a parsing function. It would be awesome if we could return the entire JSON string in a calculation called `[Http User Agent JSON]`, and then access individual values using typical &#8220;dot notation&#8221; like `[Http User Agent JSON].[category]`. Lacking this, we have two options:
+But there’s still a problem here. Woothee returns JSON, for which Tableau does not have a parsing function. It would be awesome if we could return the entire JSON string in a calculation called `[Http User Agent JSON]`, and then access individual values using typical “dot notation” like `[Http User Agent JSON].[category]`. Lacking this, we have two options:
 
 1. We could pass the whole JSON back to Tableau in one calculated field, and then create several other calculations that extract specific attributes using the various string parsing functions that Tableau does support, like `REGEXP_EXTRACT()`. For example:
 
@@ -210,7 +210,7 @@ ELSE "*"
 END
 </pre>
 
-However &#8230; Gotcha! &#8230; `REGEXP_EXTRACT()` does not work with Table Calculations!
+However … Gotcha! … `REGEXP_EXTRACT()` does not work with Table Calculations!
 
 2. A simpler approach would be to create a separate calculation for each Woothee attribute, and use separate Python functions to extract each attribute. For example, `[Http User Agent Category]` would be:
 
@@ -226,11 +226,11 @@ Yes, this results in redundant calls to Woothee to parse the same http\_user\_ag
 
 However, after all this, we hit the biggest roadblock: Table Calculations cannot be used as Tableau dimensions, which thwarts our ultimate goal of summarizing our usage data by device type. 🙁 Time to step back and re-evaluate this approach.
 
-## What TabPy isn&#8217;t
+## What TabPy isn’t
 
-The biggest lesson for me here was understanding the use cases for which TabPy was designed and those for which it was not. TabPy provides a way to use Python to extend Tableau&#8217;s analytical capabilities &#8212; for example to pass data through a machine-learning model that you trained outside of Tableau. But it does not cover every use case of using Python with Tableau. Python is a very versatile language. It overlaps with R in advanced data science capabilities, but also is a robust scripting and app development language, which is why it is especially popular among data scientists working on online applications vs. say, offline scientific analysis.
+The biggest lesson for me here was understanding the use cases for which TabPy was designed and those for which it was not. TabPy provides a way to use Python to extend Tableau’s analytical capabilities — for example to pass data through a machine-learning model that you trained outside of Tableau. But it does not cover every use case of using Python with Tableau. Python is a very versatile language. It overlaps with R in advanced data science capabilities, but also is a robust scripting and app development language, which is why it is especially popular among data scientists working on online applications vs. say, offline scientific analysis.
 
-My use case is really data prep, not analysis. I want to apply an external function once to every row of incoming data and perform my analysis on the result. And as every Tableau veteran has heard numerous times, Tableau isn&#8217;t designed to be an end-all-be-all data prep solution. It really would be cool if Tableau provided a built-in way to run external functions on data as it is imported, but alas it does not. At present, this task is more appropriately done upstream from Tableau in your data pipeline.
+My use case is really data prep, not analysis. I want to apply an external function once to every row of incoming data and perform my analysis on the result. And as every Tableau veteran has heard numerous times, Tableau isn’t designed to be an end-all-be-all data prep solution. It really would be cool if Tableau provided a built-in way to run external functions on data as it is imported, but alas it does not. At present, this task is more appropriately done upstream from Tableau in your data pipeline.
 
 ## The ETL solution
 
@@ -328,18 +328,18 @@ Finally, here is the resulting truer picture of our device type usage:
   <a href="http://www.bawbgale.com/wp-content/uploads/2017/10/tableau_views_by_user_agent_category.png"><img class="wp-image-153 size-large" src="http://www.bawbgale.com/wp-content/uploads/2017/10/tableau_views_by_user_agent_category-1024x582.png" alt="That's much closer to the mobile usage pattern I expected" width="700" height="398" srcset="https://www.bawbgale.com/wp-content/uploads/2017/10/tableau_views_by_user_agent_category-1024x582.png 1024w, https://www.bawbgale.com/wp-content/uploads/2017/10/tableau_views_by_user_agent_category-300x170.png 300w, https://www.bawbgale.com/wp-content/uploads/2017/10/tableau_views_by_user_agent_category.png 1130w" sizes="(max-width: 700px) 100vw, 700px" /></a>
   
   <p class="wp-caption-text">
-    That&#8217;s much closer to the mobile usage pattern I expected
+    That’s much closer to the mobile usage pattern I expected
   </p>
 </div>
 
-I was not surprised to see much lower mobile device usage than our initial analysis showed. However, I was puzzled at why any views on our internal dashboards would be categorized as &#8220;crawler,&#8221; but it turns out there is a reasonable explanation. The hits were all on a single dashboard and came from this HTTP user agent:
+I was not surprised to see much lower mobile device usage than our initial analysis showed. However, I was puzzled at why any views on our internal dashboards would be categorized as “crawler,” but it turns out there is a reasonable explanation. The hits were all on a single dashboard and came from this HTTP user agent:
 
 <pre class="brush: plain; title: ; notranslate" title="">Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko; Google Web Preview) Chrome/41.0.2272.118 Safari/537.36</pre>
 
-This appears to be from the Google Chrome browser&#8217;s default startup page, which shows thumbnail images of your frequently accessed web pages. This means one of our users is hitting a dashboard so often that it ranks among his top visited websites, so Chrome is returning to collect a souvenir postcard to post on his virtual refrigerator! 😀
+This appears to be from the Google Chrome browser’s default startup page, which shows thumbnail images of your frequently accessed web pages. This means one of our users is hitting a dashboard so often that it ranks among his top visited websites, so Chrome is returning to collect a souvenir postcard to post on his virtual refrigerator! 😀
 
 ## Other approaches
 
-Yet another route we could pursue is analyzing [Tableau Server&#8217;s log data](https://onlinehelp.tableau.com/current/server/en-us/logs_loc.htm). Tableau offers a free utility called [Logshark](https://www.tableau.com/about/blog/2016/11/introducing-logshark-analyze-your-tableau-server-log-files-tableau-62025) that parses these logs and generates Tableau workbooks. We could also feed those logs to a robust log collection and analytics platform like [Splunk](https://www.splunk.com/), which not only has its own front-end for viewing data but also has a native connector for Tableau. With these approaches, looking at device type data would be merely the tip of the iceburg. They enable not only comprehensive analysis of Tableau Server usage, but also are a great help for troubleshooting issues that users may be experiencing with Tableau Server dashboards.
+Yet another route we could pursue is analyzing [Tableau Server’s log data](https://onlinehelp.tableau.com/current/server/en-us/logs_loc.htm). Tableau offers a free utility called [Logshark](https://www.tableau.com/about/blog/2016/11/introducing-logshark-analyze-your-tableau-server-log-files-tableau-62025) that parses these logs and generates Tableau workbooks. We could also feed those logs to a robust log collection and analytics platform like [Splunk](https://www.splunk.com/), which not only has its own front-end for viewing data but also has a native connector for Tableau. With these approaches, looking at device type data would be merely the tip of the iceburg. They enable not only comprehensive analysis of Tableau Server usage, but also are a great help for troubleshooting issues that users may be experiencing with Tableau Server dashboards.
 
-Also, it&#8217;s important to keep in mind Tableau Server&#8217;s distinction between device type and screen size. While it&#8217;s good to be aware of how many of your users access your dashboards on desktops vs tablets vs phones, how you adapt your dashboards to serve those users is ultimately a function of screen size. If you use Tableau&#8217;s device layout features to adapt your dashboards for different screen sizes, Tableau Server will display the version that best fits the user&#8217;s browser window, regardless of whether the device displaying it is a desktop, tablet or smartphone.
+Also, it’s important to keep in mind Tableau Server’s distinction between device type and screen size. While it’s good to be aware of how many of your users access your dashboards on desktops vs tablets vs phones, how you adapt your dashboards to serve those users is ultimately a function of screen size. If you use Tableau’s device layout features to adapt your dashboards for different screen sizes, Tableau Server will display the version that best fits the user’s browser window, regardless of whether the device displaying it is a desktop, tablet or smartphone.
