@@ -29,11 +29,16 @@ baseurl: "" # the subpath of your site, e.g. /blog
 url: https://www.bawbgale.com
 twitter_username: bawbgale
 github_username:  bawbgale
+
 show_excerpts: true
+paginate: 5
+paginate_path: "/page/:num/"
+
 # Build settings
 theme: minima
 plugins:
   - jekyll-feed
+  - jekyll-paginate
 
 # Exclude from processing.
 # The following items will not be processed, by default.
