@@ -13,6 +13,7 @@ tags:
   - azure
   - google cloud
   - serverless
+excerpt: Does the Serverless Framework help your functions avoid platform lock-in?
 ---
 <figure class="wp-block-image"><img src="https://www.bawbgale.com/wp-content/uploads/2019/01/serverless_illustration.png" alt="" class="wp-image-267" srcset="https://www.bawbgale.com/wp-content/uploads/2019/01/serverless_illustration.png 888w, https://www.bawbgale.com/wp-content/uploads/2019/01/serverless_illustration-300x92.png 300w, https://www.bawbgale.com/wp-content/uploads/2019/01/serverless_illustration-768x234.png 768w" sizes="(max-width: 888px) 100vw, 888px" /></figure> 
 

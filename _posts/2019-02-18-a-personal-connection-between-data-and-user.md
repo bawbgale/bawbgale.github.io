@@ -11,6 +11,7 @@ categories:
 tags:
   - data visualization
   - tableau
+excerpt: "My entry into the weekly Makeover Monday data viz challenge was all about making it more engaging for the viewer."
 ---
 <figure class="wp-block-image">[<img src="https://www.bawbgale.com/wp-content/uploads/2019/02/00_final_viz-1-1024x778.png" alt="" class="wp-image-287" srcset="https://www.bawbgale.com/wp-content/uploads/2019/02/00_final_viz-1-1024x778.png 1024w, https://www.bawbgale.com/wp-content/uploads/2019/02/00_final_viz-1-300x228.png 300w, https://www.bawbgale.com/wp-content/uploads/2019/02/00_final_viz-1-768x583.png 768w" sizes="(max-width: 1024px) 100vw, 1024px" />](https://public.tableau.com/profile/bob.gale#!/vizhome/MakeoverMonday2018w48/Dashboard1)</figure> 
 
