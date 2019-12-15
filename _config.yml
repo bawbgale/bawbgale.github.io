@@ -18,16 +18,16 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 
-title: "Bob Gale's Blog"
-name: "Bob Gale's Blog"
+title: "Bob Gale’s Blog"
+name: "Bob Gale’s Blog"
 author: Bob Gale
 email: bawbgale@gmail.com
 description: >-
   Seattle-based software engineer and data geek. Into agile, big data, 
   cloud computing, continuous integration, Tableau, markdown, transit, 
-  warbirds and BTTF (but I'm not THAT Bob Gale).
+  warbirds and BTTF (but I’m not THAT Bob Gale).
 colophon: >-
-  Migrated from WordPress to GitHub Pages Jekyll using Ben Balter's 
+  Migrated from WordPress to GitHub Pages Jekyll using Ben Balter’s 
   wordpress-to-jekyll-exporter and some elbow grease.
 baseurl: "" # the subpath of your site, e.g. /blog
 url: https://www.bawbgale.com

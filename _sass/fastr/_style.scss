@@ -157,7 +157,7 @@ h6 {
 font-size: 2rem;    
 }
 
-.site-title a, .entry-title a {
+.site-title a, .post-title a {
     text-decoration: none;
 }
 
@@ -198,7 +198,24 @@ margin-bottom: 0px;
     color: #fff;
 }
 
-.entry-meta {
+.post-list-heading {
+  @include relative-font-size(1.75);
+}
+
+.post-list {
+  margin-left: 0;
+  list-style: none;
+
+  > li {
+		margin-bottom: $spacing-unit;
+
+		> .post-title {
+			margin-bottom: $base-font-size;
+		}
+	}
+}
+
+.post-meta {
     color: #9EABB3;
     margin-top: 10px;
     margin-bottom: 10px;
@@ -206,31 +223,31 @@ margin-bottom: 0px;
     font-family: Arial, Helvetica, sans-serif;
 }
 
-.entry-meta a,
-.entry-meta a:visited,
-.entry-meta a:focus,
-.entry-meta a:active {
+.post-meta a,
+.post-meta a:visited,
+.post-meta a:focus,
+.post-meta a:active {
     text-decoration: none;
     color: #9EABB3;
 }
 
-.entry-meta a:hover {
+.post-meta a:hover {
     text-decoration: underline;
     color: #9EABB3;
 }
 
-.entry-header {
+.post-header {
     margin-top: 1.4em;
 }
 
-.entry-summary {
+.post-summary {
 position: relative;
 margin-bottom: 6rem;
 padding-bottom: 1rem;
 border-bottom: #EBF2F6 1px solid;
 }
 
-.entry-summary:after {
+.post-summary:after {
     display: block;
     content: "";
     width: 7px;
@@ -522,8 +539,8 @@ color: #BBC7CC;
 /* Clearing */
 .clear:before,
 .clear:after,
-.entry-content:before,
-.entry-content:after,
+.post-content:before,
+.post-content:after,
 .comment-content:before,
 .comment-content:after,
 .site-header:before,
@@ -537,7 +554,7 @@ color: #BBC7CC;
 }
 
 .clear:after,
-.entry-content:after,
+.post-content:after,
 .comment-content:after,
 .site-header:after,
 .site-content:after,
@@ -619,8 +636,8 @@ color: #BBC7CC;
 	display: inline;
 }
 .page-content,
-.entry-content,
-.entry-summary {
+.post-content,
+.post-summary {
 	margin: 1em 0 0;
 }
 .page-links {
@@ -632,8 +649,8 @@ color: #BBC7CC;
 /* =Asides
 ----------------------------------------------- */
 
-.blog .format-aside .entry-title,
-.archive .format-aside .entry-title {
+.blog .format-aside .post-title,
+.archive .format-aside .post-title {
 	display: none;
 }
 
@@ -642,7 +659,7 @@ color: #BBC7CC;
 ----------------------------------------------- */
 
 .page-content img.wp-smiley,
-.entry-content img.wp-smiley,
+.post-content img.wp-smiley,
 .comment-content img.wp-smiley {
 	border: none;
 	margin-bottom: 0;
@@ -882,7 +899,7 @@ text-decoration: none;
         line-height: 1.5em;
     }
 
-    .entry-meta {
+    .post-meta {
         font-size: 1.5rem;
     }
 
@@ -928,7 +945,7 @@ text-decoration: none;
         font-size: 1.8rem;
     }
 
-    .entry-meta {
+    .post-meta {
         font-size: 1.4rem;
     }
 
