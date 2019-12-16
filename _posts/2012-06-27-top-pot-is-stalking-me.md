@@ -16,13 +16,13 @@ format: gallery
 <div id='gallery-1' class='gallery galleryid-11 gallery-columns-3 gallery-size-thumbnail'>
   <dl class='gallery-item'>
     <dt class='gallery-icon landscape'>
-      <a href='https://www.bawbgale.com/top-pot-is-stalking-me/attachment/12/'><img width="150" height="150" src="https://www.bawbgale.com/wp-content/uploads/2012/06/tumblr_m695l7IMfM1qdn9iao1_1280-150x150.jpg" class="attachment-thumbnail size-thumbnail" alt="" /></a>
+      <a href='https://www.bawbgale.com/top-pot-is-stalking-me/attachment/12/'><img width="150" height="150" src="/images/2012/06/tumblr_m695l7IMfM1qdn9iao1_1280-150x150.jpg" class="attachment-thumbnail size-thumbnail" alt="" /></a>
     </dt>
   </dl>
   
   <dl class='gallery-item'>
     <dt class='gallery-icon landscape'>
-      <a href='https://www.bawbgale.com/top-pot-is-stalking-me/attachment/13/'><img width="150" height="150" src="https://www.bawbgale.com/wp-content/uploads/2012/06/tumblr_m695l7IMfM1qdn9iao2_1280-150x150.jpg" class="attachment-thumbnail size-thumbnail" alt="" /></a>
+      <a href='https://www.bawbgale.com/top-pot-is-stalking-me/attachment/13/'><img width="150" height="150" src="/images/2012/06/tumblr_m695l7IMfM1qdn9iao2_1280-150x150.jpg" class="attachment-thumbnail size-thumbnail" alt="" /></a>
     </dt>
   </dl>
   

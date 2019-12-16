@@ -15,7 +15,7 @@ tags:
   - serverless
 excerpt: Does the Serverless Framework help your functions avoid platform lock-in?
 ---
-<figure class="wp-block-image"><img src="https://www.bawbgale.com/wp-content/uploads/2019/01/serverless_illustration.png" alt="" class="wp-image-267" srcset="https://www.bawbgale.com/wp-content/uploads/2019/01/serverless_illustration.png 888w, https://www.bawbgale.com/wp-content/uploads/2019/01/serverless_illustration-300x92.png 300w, https://www.bawbgale.com/wp-content/uploads/2019/01/serverless_illustration-768x234.png 768w" sizes="(max-width: 888px) 100vw, 888px" /></figure> 
+<figure class="wp-block-image"><img src="/images/2019/01/serverless_illustration.png" alt="" class="wp-image-267" srcset="/images/2019/01/serverless_illustration.png 888w, /images/2019/01/serverless_illustration-300x92.png 300w, /images/2019/01/serverless_illustration-768x234.png 768w" sizes="(max-width: 888px) 100vw, 888px" /></figure> 
 
 In [my last post](/wrangling-photos-into-tableau-with-a-stopover-in-serverless-functions/), I described how my colleague [Ian Cole](http://colecoding.com) and I implemented some web scraping code to wrangle aircraft photos into Tableau. One possible approach was a serverless function (i.e. a snippet of cloud-hosted code that executes on-demand) to retrieve a photo of a particular aircraft in response to a click on the Tableau viz. In the end, I opted to pre-fetch the photo URLs using a batch process, but I gained some useful experience building and deploying serverless functions to different cloud platforms. This post digs into how this was done using the Serverless Framework.
 

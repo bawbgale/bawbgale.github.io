@@ -27,7 +27,7 @@ GROUP BY device_type
 Or so we thought:
 
 <div id="attachment_116" style="width: 710px" class="wp-caption alignnone">
-  <a href="http://www.bawbgale.com/wp-content/uploads/2017/10/tableau_views_by_device_type.png"><img class="wp-image-116 size-large" src="http://www.bawbgale.com/wp-content/uploads/2017/10/tableau_views_by_device_type-1024x584.png" alt="tableau_views_by_device_type" width="700" height="399" srcset="https://www.bawbgale.com/wp-content/uploads/2017/10/tableau_views_by_device_type-1024x584.png 1024w, https://www.bawbgale.com/wp-content/uploads/2017/10/tableau_views_by_device_type-300x171.png 300w, https://www.bawbgale.com/wp-content/uploads/2017/10/tableau_views_by_device_type.png 1130w" sizes="(max-width: 700px) 100vw, 700px" /></a>
+  <a href="http://www.bawbgale.com/wp-content/uploads/2017/10/tableau_views_by_device_type.png"><img class="wp-image-116 size-large" src="http://www.bawbgale.com/wp-content/uploads/2017/10/tableau_views_by_device_type-1024x584.png" alt="tableau_views_by_device_type" width="700" height="399" srcset="/images/2017/10/tableau_views_by_device_type-1024x584.png 1024w, /images/2017/10/tableau_views_by_device_type-300x171.png 300w, /images/2017/10/tableau_views_by_device_type.png 1130w" sizes="(max-width: 700px) 100vw, 700px" /></a>
   
   <p class="wp-caption-text">
     There’s no way we have that many tablet users
@@ -325,7 +325,7 @@ df.to_csv(out_location)
 Finally, here is the resulting truer picture of our device type usage:
 
 <div id="attachment_153" style="width: 710px" class="wp-caption alignnone">
-  <a href="http://www.bawbgale.com/wp-content/uploads/2017/10/tableau_views_by_user_agent_category.png"><img class="wp-image-153 size-large" src="http://www.bawbgale.com/wp-content/uploads/2017/10/tableau_views_by_user_agent_category-1024x582.png" alt="That's much closer to the mobile usage pattern I expected" width="700" height="398" srcset="https://www.bawbgale.com/wp-content/uploads/2017/10/tableau_views_by_user_agent_category-1024x582.png 1024w, https://www.bawbgale.com/wp-content/uploads/2017/10/tableau_views_by_user_agent_category-300x170.png 300w, https://www.bawbgale.com/wp-content/uploads/2017/10/tableau_views_by_user_agent_category.png 1130w" sizes="(max-width: 700px) 100vw, 700px" /></a>
+  <a href="http://www.bawbgale.com/wp-content/uploads/2017/10/tableau_views_by_user_agent_category.png"><img class="wp-image-153 size-large" src="http://www.bawbgale.com/wp-content/uploads/2017/10/tableau_views_by_user_agent_category-1024x582.png" alt="That's much closer to the mobile usage pattern I expected" width="700" height="398" srcset="/images/2017/10/tableau_views_by_user_agent_category-1024x582.png 1024w, /images/2017/10/tableau_views_by_user_agent_category-300x170.png 300w, /images/2017/10/tableau_views_by_user_agent_category.png 1130w" sizes="(max-width: 700px) 100vw, 700px" /></a>
   
   <p class="wp-caption-text">
     That’s much closer to the mobile usage pattern I expected
