@@ -37,6 +37,8 @@ github_username:  bawbgale
 header:
   logo_img: images/bob_gale_profile(small).jpeg
 
+google_analytics: UA-57956853-1
+
 show_excerpts: true
 paginate: 5
 paginate_path: "/page/:num/"
