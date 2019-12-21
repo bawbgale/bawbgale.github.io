@@ -22,7 +22,7 @@ pagination:
           </a>
         </h2>
         {%- if site.show_excerpts -%}
-          {{ post.excerpt }}
+          {{ post.excerpt | strip_html | truncatewords:50 }}
         {%- endif -%}
       </li>
       {%- endfor -%}

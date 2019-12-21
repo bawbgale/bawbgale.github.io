@@ -3,6 +3,7 @@ id: 6
 title: 'Don’t crowdfund fireworks. Crowdsource unfireworks.'
 date: 2013-04-03T17:08:00-08:00
 author: Bob Gale
+excerpt: Oh no! Yet again, no big corporate donor is stepping up to sponsor a big 4th of July fireworks show in Seattle! It just hasn’t been the same since the collapse of WaMu — the last big company in Seattle that seemed to care about traditional civic beneficence.
 layout: post
 guid: http://www.bawbgale.com/?p=6
 permalink: /quadcopterfourth/
@@ -17,6 +18,7 @@ tags:
   - fireworks
   - maker
 ---
+
 ![Quadcopter Light Show](http://www.geekologie.com/2012/06/26/synchronized-quadrocopter-lightshow.jpg)
 
 Oh no! Yet again, no big corporate donor is stepping up to [sponsor a big 4th of July fireworks show in Seattle](http://seattletimes.com/html/localnews/2020694660_nofireworksxml.html)! It just hasn’t been the same since the collapse of WaMu — the last big company in Seattle that seemed to care about traditional civic beneficence.
