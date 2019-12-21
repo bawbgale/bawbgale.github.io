@@ -47,7 +47,7 @@ paginate_path: "/page/:num/"
 timezone: America/Los_Angeles
 
 # Build settings
-theme: minima
+theme: jekyll-theme-slate
 plugins:
   - jekyll-feed
   - jekyll-paginate
