@@ -3,7 +3,7 @@ id: 274
 title: Creating a personal connection between data and user with conditional narrative in Tableau
 date: 2019-02-18T05:55:14-08:00
 author: Bob Gale
-excerpt: "My entry into the weekly Makeover Monday data viz challenge was all about making it more engaging for the viewer."
+excerpt: Last month’s Seattle Tableau User Group meeting featured a hands-on redesign session based on Makeover Monday. (Special thanks to Gina Bremer for organizing this and pushing a number of us to try it for the first time.) Below is my entry and some notes about my approach. 
 layout: post
 guid: https://www.bawbgale.com/?p=274
 permalink: /a-personal-connection-between-data-and-user/
