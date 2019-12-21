@@ -17,13 +17,13 @@ tags:
   - serverless
   - tableau
 ---
-[In my last post](/visualizing-a-story-buried-in-faa-data/), I walked through how I built a Tableau Public viz about the amazing number of aircraft built in 1946 that are still flying. This post digs into how I incorporated some nifty aircraft photos into the viz.<figure class="wp-block-image">
+[In my last post](/visualizing-a-story-buried-in-faa-data/), I walked through how I built a Tableau Public viz about the amazing number of aircraft built in 1946 that are still flying. This post digs into how I incorporated some nifty aircraft photos into the viz.
 
-<img src="/images/2019/01/13_caption-1024x307.png" alt="" class="wp-image-233" srcset="/images/2019/01/13_caption-1024x307.png 1024w, /images/2019/01/13_caption-300x90.png 300w, /images/2019/01/13_caption-768x231.png 768w" sizes="(max-width: 1024px) 100vw, 1024px" /> </figure> 
+<figure class="wp-block-image"><img src="/images/2019/01/13_caption-1024x307.png" alt="" class="wp-image-233" srcset="/images/2019/01/13_caption-1024x307.png 1024w, /images/2019/01/13_caption-300x90.png 300w, /images/2019/01/13_caption-768x231.png 768w" sizes="(max-width: 1024px) 100vw, 1024px" /> </figure> 
 
-First the underlying question: Why? I mean, of course _I_ love to look at pictures of airplanes. That’s why the wallpaper on my devices looks like this:<figure class="wp-block-image">
+First the underlying question: Why? I mean, of course _I_ love to look at pictures of airplanes. That’s why the wallpaper on my devices looks like this:
 
-<img src="/images/2019/01/01_wallpaper-1-1024x561.png" alt="" class="wp-image-224" srcset="/images/2019/01/01_wallpaper-1-1024x561.png 1024w, /images/2019/01/01_wallpaper-1-300x164.png 300w, /images/2019/01/01_wallpaper-1-768x421.png 768w, /images/2019/01/01_wallpaper-1.png 1184w" sizes="(max-width: 1024px) 100vw, 1024px" /> <figcaption>Aviation geek wallpaper. Bonus points if you can guess what I named each device.</figcaption></figure> 
+<figure class="wp-block-image"><img src="/images/2019/01/01_wallpaper-1-1024x561.png" alt="" class="wp-image-224" srcset="/images/2019/01/01_wallpaper-1-1024x561.png 1024w, /images/2019/01/01_wallpaper-1-300x164.png 300w, /images/2019/01/01_wallpaper-1-768x421.png 768w, /images/2019/01/01_wallpaper-1.png 1184w" sizes="(max-width: 1024px) 100vw, 1024px" /> <figcaption>Aviation geek wallpaper. Bonus points if you can guess what I named each device.</figcaption></figure> 
 
 But beyond self-indulgence, what value do the photos add to the viz? Data visualization is about creating compelling visuals from _data itself_. Are photos just eye-candy? Non-data ink? Ben Jones provided one answer in his presentation “[Using Data Visualization to Inform and Inspire](https://www.slideshare.net/dataremixed/using-data-visualization-to-inform-and-inspire)”: Using powerful imagery increases the _memorability_ of a data visualization.
 
@@ -40,25 +40,25 @@ But how to display the photos as a slideshow in Tableau? This is not really the 
 
 Each has its pros, cons and best uses, but for a data-driven display of multiple large images, Web Page object is the way to go. This allows a dashboard action (i.e. clicking on an aircraft models bar chart) to cause a parameterized URL to display in another section of the dashboard. This has the added benefit of allowing me to display the image files from the JetPhotos.com site, rather than downloading and including the files in my viz.
 
-At first glance, this seemed pretty straightforward. JetPhotos.com doesn’t have a public API for looking up photos, but their URL scheme is relatively transparent. If you know the tail number of a particular aircraft, you can tack it onto a URL to find any photos they have of that plane. <figure class="wp-block-image">
+At first glance, this seemed pretty straightforward. JetPhotos.com doesn’t have a public API for looking up photos, but their URL scheme is relatively transparent. If you know the tail number of a particular aircraft, you can tack it onto a URL to find any photos they have of that plane. 
 
-<img src="/images/2019/01/02_jetphotos_url-1-1024x426.png" alt="" class="wp-image-226" srcset="/images/2019/01/02_jetphotos_url-1-1024x426.png 1024w, /images/2019/01/02_jetphotos_url-1-300x125.png 300w, /images/2019/01/02_jetphotos_url-1-768x319.png 768w, /images/2019/01/02_jetphotos_url-1.png 1121w" sizes="(max-width: 1024px) 100vw, 1024px" /> </figure> 
+<figure class="wp-block-image"><img src="/images/2019/01/02_jetphotos_url-1-1024x426.png" alt="" class="wp-image-226" srcset="/images/2019/01/02_jetphotos_url-1-1024x426.png 1024w, /images/2019/01/02_jetphotos_url-1-300x125.png 300w, /images/2019/01/02_jetphotos_url-1-768x319.png 768w, /images/2019/01/02_jetphotos_url-1.png 1121w" sizes="(max-width: 1024px) 100vw, 1024px" /> </figure> 
 
 However, this serves up a full web page with a multiple photos and lots of surrounding navigation, rather than a nice clean individual image. Not very pretty in a Tableau dashboard.
 
-Digging through the HTML of the JetPhotos.com pages, I was able to extract individual image URLs, but this presented another problem: Unlike page URLs, the image URLs are cryptic — i.e. not at all derivable based on tail number. <figure class="wp-block-image">
+Digging through the HTML of the JetPhotos.com pages, I was able to extract individual image URLs, but this presented another problem: Unlike page URLs, the image URLs are cryptic — i.e. not at all derivable based on tail number. 
 
-<img src="/images/2019/01/03_jetphotos_image_url-1024x474.png" alt="" class="wp-image-227" srcset="/images/2019/01/03_jetphotos_image_url-1024x474.png 1024w, /images/2019/01/03_jetphotos_image_url-300x139.png 300w, /images/2019/01/03_jetphotos_image_url-768x356.png 768w, /images/2019/01/03_jetphotos_image_url.png 1121w" sizes="(max-width: 1024px) 100vw, 1024px" /> </figure> 
+<figure class="wp-block-image"><img src="/images/2019/01/03_jetphotos_image_url-1024x474.png" alt="" class="wp-image-227" srcset="/images/2019/01/03_jetphotos_image_url-1024x474.png 1024w, /images/2019/01/03_jetphotos_image_url-300x139.png 300w, /images/2019/01/03_jetphotos_image_url-768x356.png 768w, /images/2019/01/03_jetphotos_image_url.png 1121w" sizes="(max-width: 1024px) 100vw, 1024px" /> </figure> 
 
 Extracting image URLs based on tail numbers would require some web scraping code.
 
-At this point, I decided to punt. To get my viz out the door, I used a temporary hack: I manually looked up 10 images for the 10 aircraft models that I wanted to feature and created a calculated field that returned the appropriate image URL based on aircraft model:<figure class="wp-block-image">
+At this point, I decided to punt. To get my viz out the door, I used a temporary hack: I manually looked up 10 images for the 10 aircraft models that I wanted to feature and created a calculated field that returned the appropriate image URL based on aircraft model:
 
-<img src="/images/2019/01/04_photo_url_hack.png" alt="" class="wp-image-228" srcset="/images/2019/01/04_photo_url_hack.png 575w, /images/2019/01/04_photo_url_hack-300x177.png 300w" sizes="(max-width: 575px) 100vw, 575px" /> </figure> 
+<figure class="wp-block-image"><img src="/images/2019/01/04_photo_url_hack.png" alt="" class="wp-image-228" srcset="/images/2019/01/04_photo_url_hack.png 575w, /images/2019/01/04_photo_url_hack-300x177.png 300w" sizes="(max-width: 575px) 100vw, 575px" /> </figure> 
 
-Then I set up a URL Action with a reference to this field as the URL:<figure class="wp-block-image">
+Then I set up a URL Action with a reference to this field as the URL:
 
-<img src="/images/2019/01/05_photo_url_action.png" alt="" class="wp-image-229" srcset="/images/2019/01/05_photo_url_action.png 503w, /images/2019/01/05_photo_url_action-280x300.png 280w" sizes="(max-width: 503px) 100vw, 503px" /> </figure> 
+<figure class="wp-block-image"><img src="/images/2019/01/05_photo_url_action.png" alt="" class="wp-image-229" srcset="/images/2019/01/05_photo_url_action.png 503w, /images/2019/01/05_photo_url_action-280x300.png 280w" sizes="(max-width: 503px) 100vw, 503px" /> </figure> 
 
 That let me publish my viz while I turned my attention to the challenge of automatically looking up photo URLs for any tail number in the FAA database. That’s when things got really interesting!
 
@@ -95,15 +95,15 @@ For hosting this code, we thought this would be a great scenario for a “server
 
 We also used this as an occasion to try out the [Serverless Framework](https://serverless.com), an open-source project to develop a platform-agnostic interface for all the major cloud providers. Once we set up the appropriate account credentials and permissions on AWS, the framework took care of a lot of the nuts-and-bolts of deploying both a Lambda function and an API Gateway endpoint. 
 
-But when we deployed it to AWS, we hit a roadblock: A 403 error and a Captcha security check page:<figure class="wp-block-image">
+But when we deployed it to AWS, we hit a roadblock: A 403 error and a Captcha security check page:
 
-<img src="/images/2019/01/07_aws.png" alt="" class="wp-image-230" srcset="/images/2019/01/07_aws.png 726w, /images/2019/01/07_aws-300x162.png 300w" sizes="(max-width: 726px) 100vw, 726px" /> <figcaption>AWS Lambda gets wanded</figcaption></figure> 
+<figure class="wp-block-image"><img src="/images/2019/01/07_aws.png" alt="" class="wp-image-230" srcset="/images/2019/01/07_aws.png 726w, /images/2019/01/07_aws-300x162.png 300w" sizes="(max-width: 726px) 100vw, 726px" /> <figcaption>AWS Lambda gets wanded</figcaption></figure> 
 
 Looked like perhaps JetPhotos.com was blocking AWS IP addresses, probably to prevent bots from extracting all of their photos.
 
-So here was our chance to see if the Serverless Framework lived up to its platform-agnostic goal. If it didn’t work on AWS, maybe it would work on Azure. We found that the Serverless Framework made this easier but not effortless. I’ll go into more details in a follow up post, but bottom line, we deployed to Azure, and it worked! No IP blocking here (for now).<figure class="wp-block-image">
+So here was our chance to see if the Serverless Framework lived up to its platform-agnostic goal. If it didn’t work on AWS, maybe it would work on Azure. We found that the Serverless Framework made this easier but not effortless. I’ll go into more details in a follow up post, but bottom line, we deployed to Azure, and it worked! No IP blocking here (for now).
 
-<img src="/images/2019/01/08_azure.png" alt="" class="wp-image-231" srcset="/images/2019/01/08_azure.png 724w, /images/2019/01/08_azure-300x116.png 300w" sizes="(max-width: 724px) 100vw, 724px" /> <figcaption>Azure Function gets waved through (though in the slow lane)</figcaption></figure> 
+<figure class="wp-block-image"><img src="/images/2019/01/08_azure.png" alt="" class="wp-image-231" srcset="/images/2019/01/08_azure.png 724w, /images/2019/01/08_azure-300x116.png 300w" sizes="(max-width: 724px) 100vw, 724px" /> <figcaption>Azure Function gets waved through (though in the slow lane)</figcaption></figure> 
 
 However, there were still a few gotchas with this approach:
 
@@ -231,14 +231,14 @@ module.exports.getjetphotobatch = (inputFile = 'tail_numbers.csv', tailNumCol = 
 }
 </pre>
 
-So with the batch mode working, I was able to collect almost 400 photo URLs for the 10 aircraft models that I was featuring in my viz. Each aircraft model’s photos were in a separate CSV, so back in Tableau I joined them with the my aircraft data using a wildcard union:<figure class="wp-block-image">
+So with the batch mode working, I was able to collect almost 400 photo URLs for the 10 aircraft models that I was featuring in my viz. Each aircraft model’s photos were in a separate CSV, so back in Tableau I joined them with the my aircraft data using a wildcard union:
 
-<img src="/images/2019/01/12_union_csvs-1024x652.png" alt="" class="wp-image-232" srcset="/images/2019/01/12_union_csvs-1024x652.png 1024w, /images/2019/01/12_union_csvs-300x191.png 300w, /images/2019/01/12_union_csvs-768x489.png 768w" sizes="(max-width: 1024px) 100vw, 1024px" /> </figure> 
+<figure class="wp-block-image"><img src="/images/2019/01/12_union_csvs-1024x652.png" alt="" class="wp-image-232" srcset="/images/2019/01/12_union_csvs-1024x652.png 1024w, /images/2019/01/12_union_csvs-300x191.png 300w, /images/2019/01/12_union_csvs-768x489.png 768w" sizes="(max-width: 1024px) 100vw, 1024px" /> </figure> 
 
 This also gave me the option of displaying multiple photos per aircraft model — i.e. potentially every tail number of that model in the JetPhotos collection. I played with a few ideas for choosing the “best” photo of each model, but settled on a simpler scheme of choosing the newest (which conveniently was the highest ID number).
 
-As a final touch, I wanted to display not only the aircraft image, but also the tail number and photographer’s name in a caption. So I modified the web scraping code to read the photographer’s name as well as the URL, then used another dashboard action to display that as a caption below the photo.<figure class="wp-block-image">
+As a final touch, I wanted to display not only the aircraft image, but also the tail number and photographer’s name in a caption. So I modified the web scraping code to read the photographer’s name as well as the URL, then used another dashboard action to display that as a caption below the photo.
 
-<img src="/images/2019/01/13_caption-1024x307.png" alt="" class="wp-image-233" srcset="/images/2019/01/13_caption-1024x307.png 1024w, /images/2019/01/13_caption-300x90.png 300w, /images/2019/01/13_caption-768x231.png 768w" sizes="(max-width: 1024px) 100vw, 1024px" /> <figcaption>Final Top Aircraft Models chart with slideshow and caption on Tableau Public</figcaption></figure> 
+<figure class="wp-block-image"><img src="/images/2019/01/13_caption-1024x307.png" alt="" class="wp-image-233" srcset="/images/2019/01/13_caption-1024x307.png 1024w, /images/2019/01/13_caption-300x90.png 300w, /images/2019/01/13_caption-768x231.png 768w" sizes="(max-width: 1024px) 100vw, 1024px" /> <figcaption>Final Top Aircraft Models chart with slideshow and caption on Tableau Public</figcaption></figure> 
 
 In the end, I was able to populate my viz with a nice slideshow of aircraft photos, explore a number of possible solutions, and produce some versatile aircraft photo retrieval code that I can use for future aviation vizes. All the resulting code is on [GitHub](https://github.com/bawbgale/jetphotos-translator) if you want to explore it in more detail.
