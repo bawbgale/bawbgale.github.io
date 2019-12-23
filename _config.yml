@@ -33,6 +33,7 @@ baseurl: "" # the subpath of your site, e.g. /blog
 url: https://www.bawbgale.com
 twitter_username: bawbgale
 github_username:  bawbgale
+linkedin_username: bawbgale
 
 header:
   logo_img: images/bob_gale_profile(small).jpeg
