@@ -2,7 +2,6 @@
 id: 11
 date: 2012-06-27T01:31:00-08:00
 author: Bob Gale
-excerpt: My job at Intersect had the major perk of being on the same block as Top Pot’s Belltown cafe. Yum! Then they opened a shop in Wedgwood, about a mile from my house. Hot damn! Doughnuts coming and going!
 layout: post
 guid: http://www.bawbgale.com/?p=11
 permalink: /top-pot-is-stalking-me/

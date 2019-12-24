@@ -41,6 +41,8 @@ header:
 google_analytics: UA-57956853-1
 
 show_excerpts: true
+excerpt_separator: <!--more-->
+
 paginate: 5
 paginate_path: "/page/:num/"
 

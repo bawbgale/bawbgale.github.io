@@ -3,7 +3,6 @@ id: 10
 title: I hope the Sinking Ship garage is never torn down
 date: 2012-07-04T20:08:09-08:00
 author: Bob Gale
-excerpt: What? Bob, how could you say such a thing about that ugly monstrosity? They tore down a beautiful old hotel to build it, an event that so horrified Seattle that it kicked off the preservation movement that led to the protection of Pioneer Square.
 layout: post
 guid: http://www.bawbgale.com/?p=10
 permalink: /i-hope-the-sinking-ship-garage-is-never-torn-down/
