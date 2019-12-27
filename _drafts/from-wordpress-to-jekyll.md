@@ -211,19 +211,11 @@ The cause turned out to be Jekyll Exporter including the opening `<figure>` tag 
 
 ### Embeds
 
-Two of my posts that contained embeds did not translate correct. One used a custom `[embed]https://youtu.be/gRHOPmGUtPA[/embed]` in Wordpress, which was stripped out entirely. 
+Two of my posts that contained embeds did not translate correctly. One used a custom Wordpress tag `[embed]https://youtu.be/gRHOPmGUtPA[/embed]`, which was stripped out entirely. 
 
-The other was an embedded Tableau Public viz like this:
+The other was an embedded Tableau Public viz. The embed code provided by Tableau Public consisted of a `<div>` tag followed by `<script>`. Jekyll Exported exported only the `<div>` portion. Pasting the original embed code into my Jekyll initially didn't work because some of it was indented in a way that Markdown interpretted as a preformatted code block. Fixing the indenting not only rendered correctly but looked neater in the code.
 
-```html
-<div class='tableauPlaceholder' id='viz1538504490862' style='position: relative'>
-  <noscript>
-    <a href='#'><img alt='The Longest Flights ' src='https://public.tableau.com/static/images/Lo/LongestFlights_0/TheLongestFlights/1_rss.png' style='border: none' /></a>
-  </noscript>
-</div>
-```
-
-Even though Markdown is supposed to allow HTML content to be mixed it, I couldn't get this to work, so I punted an put that code in a special layout file used only for that post.
+(side by side images)
 
 ## Conclusion
 
