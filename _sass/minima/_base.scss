@@ -59,7 +59,9 @@ img {
   vertical-align: middle;
 }
 
-
+.border {
+  border: 1px solid $grey-color-light
+}
 
 /**
  * Figures
@@ -70,6 +72,7 @@ figure > img {
 
 figcaption {
   font-size: $small-font-size;
+  line-height: $base-line-height * 0.875;
 }
 
 
