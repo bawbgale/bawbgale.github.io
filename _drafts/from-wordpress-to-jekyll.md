@@ -10,13 +10,13 @@ tags:
   - jekyll
   - markdown
 ---
-If you’ve visited my blog before, this post probably doesn’t look very different, but there are big changes under the hood! It’s now hosted using Jekyll on GitHub Pages. Here’s a write-up of how I converted it from WordPress.
+If you’ve visited my blog before, this post probably doesn’t look very different, but there are big changes under the hood! It’s now hosted using [Jekyll](https://jekyllrb.com/) on [GitHub Pages](https://pages.github.com/). Here’s a write-up of how I converted it from WordPress.
 
 I’ve been hosting this blog for years using WordPress hosted on Site5. I chose that arrangement vs. hosting on WordPress.com to get experience customizing my own instance of the leading blogging platform. That experience lead me to one conclusion: I really don’t like WordPress! But I don’t blog very often, so I wasn’t motivated to change it.
 
 When it came time to set up a blog for my consulting business, [Data Squadron](https://datasquadron.com), I wanted to take a different approach. Like many coders, I would much rather format text via Markdown, handle version control via Git, and customize the site via writing code directly rather than using some arcane plug-in architecture. Static site generators make that all possible, and GitHub Pages offers a no-brainer free solution using Jekyll.
 
-My colleague Art Rosnovsky helped design and build the site, and he steered me toward hosting on Netlify rather than GitHub Pages. Netlify still uses GitHub for the site's source code but doesn’t restrict what plug-ins you can use. It offers powerful features like generating a preview site for every pull request, but is still free for low-volume sites.
+My colleague Art Rosnovsky helped design and build the site, and he steered me toward hosting on Netlify rather than GitHub Pages. [Netlify](https://www.netlify.com/) still uses GitHub (or GitLab or Bitbucket) for the site's source code but doesn’t restrict what Jekyll plug-ins you can use---or even that you use Jekyll at all. It offers powerful features like generating a preview site for every pull request, but is still free for low-volume sites.
 
 Soon after we got [datasquadron.com](https://datasquadron.com) up and running, my Site5 bill came due, so I decided it was time to convert my personal blog to Jekyll. Fortunately, there’s a WordPress plug-in for that! [Jekyll Exporter](https://wordpress.org/plugins/jekyll-exporter/) generates all the files needed for a barebones Jekyll site. You still need to dig into the Jekyll code to match the design of your existing site, but that's the fun part! In this post I cover what Jekyll Exporter handled automatically, what I still needed to customize, and some specific issues I had to contend with.
 
@@ -47,13 +47,14 @@ $ git push -u origin master
 4. Copy the contents of your WordPress export into this directory. There will already be a `_posts` directory with an auto-created initial post. You can fully replace this directory with your exported one. 
 5. Merge the two `_config.yml` files created by Jekyll Exporter and `jekyll new`. In my case, Jekyll Exporter's `_config.yml` contained only three lines, for the `title`, `url` and `description` of my site, while the `jekyll new` version included useful boilerplate, and more importantly, the `theme` and `plugins` settings.
 
-At this point, I was able to run `bundle exec jekyll serve` to preview the site locally. The result was a totally functional (though plain) index page:
+At this point, I was able to run `bundle exec jekyll serve` to preview the site locally. The result was a totally functional (though plain) index page and very similar post pages:
 
-(before and after index illustration)
-
-And quite decent looking post pages:
-
-(before and after post illustration)
+<figure>
+  <img src="/images/2019/12/wp-jekyll-side-by-side-index.png" alt="" class="border"/>
+  <figcaption><p>Side-by-side comparison of my WordPress blog and the out-of-the-box Jekyll Exporter version, showing index page (above) and post page (below).</p>
+  </figcaption>
+  <img src="/images/2019/12/wp-jekyll-side-by-side-post.png" alt="" class="border"/>
+</figure>
 
 Now to customize it!
 
@@ -63,9 +64,62 @@ Like all good web software, Jekyll facilitates the separation of design and cont
 
 But wait! The directory structure created by `jekyll new` contains none of the design directories. That's because the default Jekyll site uses a Gem-based theme, called Minima, so you don't need to clutter your files with templates until you want to start overriding the defaults. You can do this by finding the gem's theme files with `bundle show minima`, copying the files you want to customize to your site's directory, and editing them.
 
+### Stylesheets
+
+My first step to apply my old site's design was bring over the stylesheets. My WordPress site used a theme called Fastr, which was defined in a single `style.css` file. But Minima is defined in the more versatile Sass format, which allows such useful things as variables, nesting and importing. I really wanted to preserve the best of both, but didn't want to go through each theme line by line to come up with a combined theme. Instead, I attempted a mashup. Sass is a superset of plain old CSS, and later defined styles generally take precedence. So I copied my old `style.css` to `_sass/fastr/_style.scss` and imported it in `_sass/minima.scss` _after_ the Minima imports:
+
+   ```css
+   @import
+     "minima/base",
+     "minima/layout",
+     "minima/syntax-highlighting",
+     "fastr/style"
+   ;
+   ```
+
+Then I followed the tried and true approach of previewing the site, looking for weirdness, using Chrome Inspector to find which style rules were causing it, and making adjustments. The biggest change I needed to make based on this was to change several class names to use the term `post` instead of `entry`.
+
+### Excerpts
+
+Another obvious difference was the lack of an excerpt under each post title. Both WordPress and Jekyll support automatic excerpts of the post text, or an explicit chunk of text defined in your post's metadata. Jekyll Exporter did a good job of capturing the explicit excerpts I defined for some of my WordPress posts. But there were some subtle differences in how auto excerpts were handled.
+
+To enable excerpts, I added this to my `_config.yml`: 
+ 
+```yaml
+show_excerpts: true
+```
+
+And added code to my index page layout to display it:
+
+```liquid
+{% raw %}{%- if site.show_excerpts -%}
+  {{ post.excerpt }}
+{%- endif -%}{% endraw %}
+```
+
+However that displayed the full HTML from the beginning of the post, even it that included images. Not exactly what I wanted. Not surprisingly, Jekyll has a solution for this. You can tell it to strip HTML, as well as control the number of words in the excerpt:
+
+```liquid
+{% raw %}{{ post.excerpt | strip_html | truncatewords:50 }}{% endraw %}
+```
+
+But this had an unexpected side-effect: Posts that started with an image had no auto exerpt at all. Turns out it's because Jekyll excerpts works like this:
+
+1. Markdown content separated by line breaks are wrapped in `<p>...</p>` tags
+2. `post.excerpt` takes only the first paragraph of the post (even if it has fewer words than your `truncatewords` parameter)
+3. `strip_html` then removes the `img` tag, leaving nothing to display.
+
+The fix for this turned out to lie in another handy Jekyll feature. Your `_config.yml` can specify an `excerpt_separator` string, which can be something invisible like an HTML comment: 
+```yaml
+{% raw %}excerpt_separator: <!--end_excerpt-->{% endraw %}
+```
+So instead of defining a custom excerpt or letting the Jekyll to take the first N words, you tell it to use the first text of the post until it hits this marker. Interestingly, just including this setting fixed my image problem, _even if I didn't use the separator in my post._ Using this setting appears to override the only-take-the-first-p behavior.
+
+One thing to note is that if you use both `truncatewords` and an `excerpt_separator`, your excerpt will end with whichever comes first.
+
 ### Pagination
 
-The most obvious customization I needed was pagination. My existing site shows five posts per page. To replicate this in Jekyll, I needed to:
+Another obvious customization I needed was pagination. My existing site shows five posts per page. To replicate this in Jekyll, I needed to:
 
 1. Add the "jekyll-paginate” gem (which is allowed on GitHub Pages) to my Gemfile and run `bundle install`.
 2. Add some settings to `_config.yml`, including one to match the URL structure of my WordPress site:
@@ -115,70 +169,13 @@ The most obvious customization I needed was pagination. My existing site shows f
 
 Here's how that looked:
 
-(08837d8 add pagination and more overrides.png)
-
-### Excerpts
-
-Another obvious difference was the lack of an excerpt under each post title. Both WordPress and Jekyll support automatic excerpts of the post text, or an explicit chunk of text defined in your post's metadata. Jekyll Exporter did a good job of capturing those my explicit excerpts. But there were some subtle differences in how auto excerpts were handled.
-
-To enable excerpts, I added this to my `_config.yml`: 
- 
-```yaml
-show_excerpts: true
-```
-
-And added code to my index page layout to display it:
-
-```liquid
-{% raw %}{%- if site.show_excerpts -%}
-  {{ post.excerpt }}
-{%- endif -%}{% endraw %}
-```
-
-However that displayed the full HTML from the beginning of the post, even it that included images. Not exactly what I wanted. Not surprisingly, Jekyll has a solution for this. You can tell it to strip HTML, as well as control the number of words in the excerpt:
-
-```liquid
-{% raw %}{{ post.excerpt | strip_html | truncatewords:50 }}{% endraw %}
-```
-
-But this had an unexpected side-effect: Posts that started with an image had no auto exerpt at all. Turns out it's because Jekyll excerpts works like this:
-
-1. Markdown content separated by line breaks are wrapped in `<p>...</p>` tags
-2. `post.excerpt` takes only the first paragraph of the post (even if it has fewer words than your `truncatewords` parameter)
-3. `strip_html` then removes the `img` tag, leaving nothing to display.
-
-The fix for this turned out to lie in another handy Jekyll feature. Your `_config.yml` can specify an `excerpt_separator` string, which can be something invisible like an HTML comment: 
-```yaml
-{% raw %}excerpt_separator: <!--end_excerpt-->{% endraw %}
-```
-So instead of defining a custom excerpt or letting the Jekyll to take the first N words, you tell it to use the first text of the post until it hits this marker. Interestingly, just including this setting fixed my image problem, _even if I didn't use the separator in my post._ Using this setting appears to override the only-take-the-first-p behavior.
-
-One thing to note is that if you use both `truncatewords` and an `excerpt_separator`, your excerpt will end with whichever comes first.
+![With pagination](/images/2019/12/pagination.png){:.border}
 
 ### Header and Footer
 
-The next most obvious change needed was the header and footer. Both my WordPress theme and Minima had these nicely split out as separate include files, so it was pretty easy to translate my old templates. I actually liked the Minima footer better than my old one, so I ended up using it as-is:
+Next I turned my attention to the header and footer. Both my WordPress theme and Minima had these nicely split out as separate include files, so it was pretty easy to translate my old templates. Now my new site was looking much closer to the old. However, I actually liked the Minima footer better than my old one, so I ended up using it as-is. 
 
-(1d05ba0 fix up the header.png)
-
-### Stylesheets
-
-Now I needed to turn my attention to stylesheets. My WordPress site used a theme called Fastr, which was defined in a single `style.css` file. But Minima is defined in the more versatile Sass format, which allows such things as variables, nesting and importing. I really wanted to preserve the best of both, but didn't want to go through each theme line by line to come up with a combined theme. Instead, I attempted a mashup. Sass is a superset of plain old CSS, and later defined styles generally take precedence. So I copied my old `style.css` to `_sass/fastr/_style.scss` and imported it in `_sass/minima.scss` _after_ the Minima imports:
-
-   ```css
-   @import
-     "minima/base",
-     "minima/layout",
-     "minima/syntax-highlighting",
-     "fastr/style"
-   ;
-   ```
-
-Then I followed the tried and true approach of previewing the site, looking for weirdness, using Chrome Inspector to find which style rules were causing it, and making adjustments.
-
-Now my new site was looking much closer to the old.
-
-(e0c613e lots of style fixes.png)
+![Style improvements](/images/2019/12/style-fixes.png){:.border}
 
 ## Issues
 
@@ -186,26 +183,28 @@ Although Jekyll Exporter handled most of the conversion of blog posts to Markdow
 
 ### Image references
 
-I noticed that all the image URLs in my posts used absolute rather than relative references (e.g. `https://www.bawbgale.com/wp-content/uploads/2019/02/03_city_data.png` instead of `/wp-content/uploads/2019/02/03_city_data.png`). So they were all still working but being served from my old WordPress site rather than the local copies. They would still work after I switched my domain name to point to my new GitHub Pages hosted site, but only if I kept the `wp-content` directory structure exactly the same. Instead, I decided to move everything in `/wp-content/uploads` to `/images` and find-replace all the image URLs to make them relative.
+I noticed that all the image URLs in my posts used absolute rather than relative references (e.g. `https://www.bawbgale.com/wp-content/uploads/2019/02/03_city_data.png` instead of `/wp-content/uploads/2019/02/03_city_data.png`). So they were all still working but being served from my old WordPress site rather than the local copies. They would still work after I switched my domain name to point to my new GitHub Pages site, but only if I kept the `wp-content` directory structure exactly the same. Instead, I decided to move everything in `/wp-content/uploads` to `/images` and find-replace all the image URLs to make them relative.
 
 ### Smart quotes 
 
-Special characters like curly quotes, apostrophes, ellipses and dashes got converted to numeric codes like `&#8217;`. They displayed fine in post body content, but a few were present in titles and were displayed as-is rather than being rendered as special characters. Another round of find and replace cleaned that up.
+Special characters like curly quotes, apostrophes, ellipses and dashes got converted to numeric codes like `&#8217;`. They displayed fine in post body content, but a few were present in metadata and were displayed as-is rather than being rendered as special characters. Another round of find and replace cleaned that up.
 
 ### Figure tags
 
-I had used `<figure>` tags in my blog posts to display captions below images. For example:
+I use `<figure>` tags in my blog posts to display captions below images. For example:
 
 ```html
 <figure>
-  <img src="image_url" /> 
-  <figcaption>Image caption</figcaption>
+  <img src="/wp-content/uploads/2019/01/01_wallpaper-1-1024x561.png" /> 
+  <figcaption>Aviation geek wallpaper. Bonus points if you can guess what I named each device.</figcaption>
 </figure> 
 ```
 
+![Figure tag](/images/2019/12/figure-wp.png){:.border}
+
 Markdown is designed to handle mixing in raw HTML, but some of these tags were bleeding through to the rendered posts.
 
-(figure-jekyll.png)
+![Figure tag issue](/images/2019/12/figure-jekyll.png){:.border}
 
 The cause turned out to be Jekyll Exporter including the opening `<figure>` tag with the preceeding paragraph. So when the Markdown was rendered to HTML, a `</p>` tag was inserted after it, which broke its connection with the subsequent tags. I researched a few workaround to handling captions in Markdown without HTML but wasn't happy with any of them, so decided to just fix the line breaks and stick with HTML `<figure>` tags.
 
@@ -213,9 +212,13 @@ The cause turned out to be Jekyll Exporter including the opening `<figure>` tag 
 
 Two of my posts that contained embeds did not translate correctly. One used a custom Wordpress tag `[embed]https://youtu.be/gRHOPmGUtPA[/embed]`, which was stripped out entirely. 
 
-The other was an embedded Tableau Public viz. The embed code provided by Tableau Public consisted of a `<div>` tag followed by `<script>`. Jekyll Exported exported only the `<div>` portion. Pasting the original embed code into my Jekyll initially didn't work because some of it was indented in a way that Markdown interpretted as a preformatted code block. Fixing the indenting not only rendered correctly but looked neater in the code.
+The other was an embedded Tableau Public viz. The embed code provided by Tableau Public consisted of a `<div>` tag followed by `<script>`. Jekyll Exported exported only the `<div>` portion. Pasting the original embed code into my Jekyll initially didn't work because some of it was indented in a way that Markdown interpretted as a preformatted code block. Tidying the indenting not only rendered correctly but looked neater in the code.
 
-(side by side images)
+<figure>
+  <img src="/images/2019/12/embed-fix.png" alt="" class="border"/>
+  <figcaption><p>Spaces in embedded HTML threw some of it into a code block. Tidying the formatting fixed it.</p>
+  </figcaption>
+</figure>
 
 ## Conclusion
 
