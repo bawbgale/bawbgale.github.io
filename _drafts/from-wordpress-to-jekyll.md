@@ -10,32 +10,36 @@ tags:
   - jekyll
   - markdown
 ---
+
 If you’ve visited my blog before, this post probably doesn’t look very different, but there are big changes under the hood! It’s now hosted using [Jekyll](https://jekyllrb.com/) on [GitHub Pages](https://pages.github.com/). Here’s a write-up of how I converted it from WordPress.
 
 I’ve been hosting this blog for years using WordPress hosted on Site5. I chose that arrangement vs. hosting on WordPress.com to get experience customizing my own instance of the leading blogging platform. That experience lead me to one conclusion: I really don’t like WordPress! But I don’t blog very often, so I wasn’t motivated to change it.
 
 When it came time to set up a blog for my consulting business, [Data Squadron](https://datasquadron.com), I wanted to take a different approach. Like many coders, I would much rather format text via Markdown, handle version control via Git, and customize the site via writing code directly rather than using some arcane plug-in architecture. Static site generators make that all possible, and GitHub Pages offers a no-brainer free solution using Jekyll.
 
-My colleague Art Rosnovsky helped design and build the site, and he steered me toward hosting on Netlify rather than GitHub Pages. [Netlify](https://www.netlify.com/) still uses GitHub (or GitLab or Bitbucket) for the site's source code but doesn’t restrict what Jekyll plug-ins you can use---or even that you use Jekyll at all. It offers powerful features like generating a preview site for every pull request, but is still free for low-volume sites.
+My colleague [Art Rosnovsky](https://rosnovsky.us) helped design and build the site, and he steered me toward hosting on Netlify rather than GitHub Pages. [Netlify](https://www.netlify.com/) still uses GitHub (or GitLab or Bitbucket) for the site's source code but doesn’t restrict what Jekyll plug-ins you can use---or even that you use Jekyll at all. It offers powerful features like generating a preview site for every pull request, but is still free for low-volume sites.
 
 Soon after we got [datasquadron.com](https://datasquadron.com) up and running, my Site5 bill came due, so I decided it was time to convert my personal blog to Jekyll. Fortunately, there’s a WordPress plug-in for that! [Jekyll Exporter](https://wordpress.org/plugins/jekyll-exporter/) generates all the files needed for a barebones Jekyll site. You still need to dig into the Jekyll code to match the design of your existing site, but that's the fun part! In this post I cover what Jekyll Exporter handled automatically, what I still needed to customize, and some specific issues I had to contend with.
 
 ## Setup and Export
 
-This method of maintaining a blog appeals mainly to coders, so I'm assuming you're comfortable with command line operations, already have Git installed, and have a basic working knowledge of HTML and CSS. Jekyll is written in Ruby, so you'll need Ruby and Bundler installed. 
+This method of maintaining a blog appeals mainly to coders, so I'm assuming you're comfortable with command line operations, already have Git installed, and have a basic working knowledge of HTML and CSS. Jekyll is written in Ruby, so you'll need Ruby and Bundler installed.
 
-Your first step is to install Jekyll Exporter on your WordPress site, which will add an "Export to Jekyll" command to your "Tools" menu. This converts all your WordPress posts and drafts to Markdown, organizes them into the Jekyll directory structure, generates a `_config.yml`, and saves it all in a .zip archive. It also includes your `wp-content` directory with all your site's images. It does not, however, attempt to convert your design theme. More on that later. 
+Your first step is to install Jekyll Exporter on your WordPress site, which will add an "Export to Jekyll" command to your "Tools" menu. This converts all your WordPress posts and drafts to Markdown, organizes them into the Jekyll directory structure, generates a `_config.yml`, and saves it all in a .zip archive. It also includes your `wp-content` directory with all your site's images. It does not, however, attempt to convert your design theme. More on that later.
 
 In order to preview your newly created Jekyll site and publish it to GitHub Pages, you'll need to set up your GitHub repo and install Jekyll locally. I found it worked best to do that in this order:
 
 1. Create a new repo on GitHub repo using their special naming convention for GitHub Pages sites: `<your_github_name>.github.io`.
 2. Often your next step is to `git clone` the repo on your local machine. Don't do that. Instead, use Jekyll to create your local directory:
+
 ```shell
 $ gem install bundler jekyll
 $ jekyll new <your_github_name>.github.io
 $ cd <your_github_name>.github.io
 ```
+
 3. Then initialize git in that directory and link it to your remote GitHub repo:
+
 ```shell
 $ touch README.md
 $ git init
@@ -44,7 +48,8 @@ $ git commit -m "first commit"
 $ git remote add origin https://github.com/<your_github_name>/<your_github_name>.github.io.git
 $ git push -u origin master
 ```
-4. Copy the contents of your WordPress export into this directory. There will already be a `_posts` directory with an auto-created initial post. You can fully replace this directory with your exported one. 
+
+4. Copy the contents of your WordPress export into this directory. There will already be a `_posts` directory with an auto-created initial post. You can fully replace this directory with your exported one.
 5. Merge the two `_config.yml` files created by Jekyll Exporter and `jekyll new`. In my case, Jekyll Exporter's `_config.yml` contained only three lines, for the `title`, `url` and `description` of my site, while the `jekyll new` version included useful boilerplate, and more importantly, the `theme` and `plugins` settings.
 
 At this point, I was able to run `bundle exec jekyll serve` to preview the site locally. The result was a totally functional (though plain) index page and very similar post pages:
@@ -97,13 +102,13 @@ And added code to my index page layout to display it:
 {%- endif -%}{% endraw %}
 ```
 
-However that displayed the full HTML from the beginning of the post, even it that included images. Not exactly what I wanted. Not surprisingly, Jekyll has a solution for this. You can tell it to strip HTML, as well as control the number of words in the excerpt:
+However that displayed the full HTML from the beginning of the post, even if that included images. Not exactly what I wanted. Not surprisingly, Jekyll has a solution for this. You can tell it to strip HTML, as well as control the number of words in the excerpt:
 
 ```liquid
 {% raw %}{{ post.excerpt | strip_html | truncatewords:50 }}{% endraw %}
 ```
 
-But this had an unexpected side-effect: Posts that started with an image had no auto exerpt at all. Turns out it's because Jekyll excerpts works like this:
+But this had an unexpected side-effect: Posts that started with an image had no auto excerpt at all. Turns out it's because Jekyll excerpts works like this:
 
 1. Markdown content separated by line breaks are wrapped in `<p>...</p>` tags
 2. `post.excerpt` takes only the first paragraph of the post (even if it has fewer words than your `truncatewords` parameter)
@@ -195,7 +200,7 @@ I use `<figure>` tags in my blog posts to display captions below images. For exa
 
 ```html
 <figure>
-  <img src="/wp-content/uploads/2019/01/01_wallpaper-1-1024x561.png" /> 
+  <img src="/wp-content/uploads/2019/01/01_wallpaper-1-1024x561.png" />
   <figcaption>Aviation geek wallpaper. Bonus points if you can guess what I named each device.</figcaption>
 </figure> 
 ```
@@ -206,13 +211,13 @@ Markdown is designed to handle mixing in raw HTML, but some of these tags were b
 
 ![Figure tag issue](/images/2019/12/figure-jekyll.png){:.border}
 
-The cause turned out to be Jekyll Exporter including the opening `<figure>` tag with the preceeding paragraph. So when the Markdown was rendered to HTML, a `</p>` tag was inserted after it, which broke its connection with the subsequent tags. I researched a few workaround to handling captions in Markdown without HTML but wasn't happy with any of them, so decided to just fix the line breaks and stick with HTML `<figure>` tags.
+The cause turned out to be Jekyll Exporter including the opening `<figure>` tag with the preceding paragraph. So when the Markdown was rendered to HTML, a `</p>` tag was inserted after it, which broke its connection with the subsequent tags. I researched a few workaround to handling captions in Markdown without HTML but wasn't happy with any of them, so decided to just fix the line breaks and stick with HTML `<figure>` tags.
 
 ### Embeds
 
 Two of my posts that contained embeds did not translate correctly. One used a custom Wordpress tag `[embed]https://youtu.be/gRHOPmGUtPA[/embed]`, which was stripped out entirely. 
 
-The other was an embedded Tableau Public viz. The embed code provided by Tableau Public consisted of a `<div>` tag followed by `<script>`. Jekyll Exported exported only the `<div>` portion. Pasting the original embed code into my Jekyll initially didn't work because some of it was indented in a way that Markdown interpretted as a preformatted code block. Tidying the indenting not only rendered correctly but looked neater in the code.
+The other was an embedded Tableau Public viz. The embed code provided by Tableau Public consisted of a `<div>` tag followed by `<script>`. Jekyll Exported exported only the `<div>` portion. Pasting the original embed code into my Jekyll initially didn't work because some of it was indented in a way that Markdown interpreted as a preformatted code block. Tidying the indenting not only rendered correctly but looked neater in the code.
 
 <figure>
   <img src="/images/2019/12/embed-fix.png" alt="" class="border"/>
