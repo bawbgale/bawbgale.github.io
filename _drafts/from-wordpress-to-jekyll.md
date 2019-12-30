@@ -32,22 +32,22 @@ In order to preview your newly created Jekyll site and publish it to GitHub Page
 1. Create a new repo on GitHub repo using their special naming convention for GitHub Pages sites: `<your_github_name>.github.io`.
 2. Often your next step is to `git clone` the repo on your local machine. Don't do that. Instead, use Jekyll to create your local directory:
 
-```shell
-$ gem install bundler jekyll
-$ jekyll new <your_github_name>.github.io
-$ cd <your_github_name>.github.io
-```
+   ```shell
+   $ gem install bundler jekyll
+   $ jekyll new <your_github_name>.github.io
+   $ cd <your_github_name>.github.io
+   ```
 
 3. Then initialize git in that directory and link it to your remote GitHub repo:
 
-```shell
-$ touch README.md
-$ git init
-$ git add README.md
-$ git commit -m "first commit"
-$ git remote add origin https://github.com/<your_github_name>/<your_github_name>.github.io.git
-$ git push -u origin master
-```
+   ```shell
+   $ touch README.md
+   $ git init
+   $ git add README.md
+   $ git commit -m "first commit"
+   $ git remote add origin https://github.com/<your_github_name>/<your_github_name>.github.io.git
+   $ git push -u origin master
+   ```
 
 4. Copy the contents of your WordPress export into this directory. There will already be a `_posts` directory with an auto-created initial post. You can fully replace this directory with your exported one.
 5. Merge the two `_config.yml` files created by Jekyll Exporter and `jekyll new`. In my case, Jekyll Exporter's `_config.yml` contained only three lines, for the `title`, `url` and `description` of my site, while the `jekyll new` version included useful boilerplate, and more importantly, the `theme` and `plugins` settings.
