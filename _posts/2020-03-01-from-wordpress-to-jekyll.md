@@ -12,7 +12,7 @@ tags:
 ---
 
 If you’ve visited my blog before, this post probably doesn’t look very different, but there are big changes under the hood! It’s now hosted using [Jekyll](https://jekyllrb.com/) on [GitHub Pages](https://pages.github.com/). Here’s a write-up of how I converted it from WordPress.
-
+<!--more-->
 I’ve been hosting this blog for years using WordPress hosted on Site5. I chose that arrangement vs. hosting on WordPress.com to get experience customizing my own instance of the leading blogging platform. That experience lead me to one conclusion: I really don’t like WordPress! But I don’t blog very often, so I wasn’t motivated to change it.
 
 When it came time to set up a blog for my consulting business, [Data Squadron](https://datasquadron.com), I wanted to take a different approach. Like many coders, I would much rather format text via Markdown, handle version control via Git, and customize the site via writing code directly rather than using some arcane plug-in architecture. Static site generators make that all possible, and GitHub Pages offers a no-brainer free solution using Jekyll.
