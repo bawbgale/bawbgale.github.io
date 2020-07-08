@@ -2,6 +2,7 @@
 title: Helping Tableau recognize UK postcodes
 author: Bob Gale
 layout: post
+permalink: /tableau-geo-role-locale/
 categories:
   - Uncategorized
 tags:
