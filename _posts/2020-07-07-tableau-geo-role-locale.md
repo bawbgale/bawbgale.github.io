@@ -14,8 +14,8 @@ The Information Lab is based in the UK, so naturally their examples tend to be U
 
 As a US Tableau user, I found that I needed to give Tableau a little more help to recognize the values. I had to click  "166 unknown" in the lower right corner, click "Edit Locations...", then change my default geographic locale from United States to United Kingdom. 
 
-![Tableau geographic locale](../images/2020/07/uk_outcode_fix.png)
+![Tableau geographic locale](/images/2020/07/uk_outcode_fix.png)
 
 Once I did that, I was able to reproduce the rest of Tim's lesson exactly!
 
-![Tableau London Housing dashboard](../images/2020/07/london_housing_final.png)
+![Tableau London Housing dashboard](/images/2020/07/london_housing_final.png)
